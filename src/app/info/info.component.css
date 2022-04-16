@@ -1,0 +1,12 @@
+.elementor-divider-separator {
+    width: 27% !important;
+}
+.elementor-widget-divider:not(.elementor-widget-divider--view-line_text):not(.elementor-widget-divider--view-line_icon) .elementor-divider-separator {
+    border-top: var(--divider-border-width) var(--divider-border-style) var(--divider-color);
+}
+.elementor-element.elementor-element-e3ff7e3 {
+    --divider-border-style: zigzag_tribal;
+    --divider-color: #FFFFFF;
+    --divider-pattern-height: 15.3px;
+}
+

@@ -1,0 +1,49 @@
+<div class="row">
+    <div class="col-md-3 col-sm-2" style="margin-top:2%;">
+      <app-sidebar></app-sidebar>
+    </div>
+    <div class="col-md-9 col-sm-10" style="margin-top:2%;">
+      <div class="container">
+  
+        <h1 class="mt-4">Edition des Régions Educatives</h1>
+        <div class="row" style="margin-top: 2%;">
+            <div>
+                <form role="regionEducative" method="POST" action="javascript:;">
+                    <div class="row">
+                        <label for="libelle_region_edu">Libellé de région éducative :</label>
+                        <input type="text" id="libelle_region_edu" class="field" id="libelle_region_edu" name="libelle_region_edu"> 
+                    </div>
+                    <div style="margin-top: 2%;">
+                        <input type="submit" value="Valider" class="error-btn button">
+                    </div>
+                </form>
+                
+            </div>
+        </div>
+        <table class="table table-bordered table-dark mt-5">
+            <thead>
+              <tr>
+                <!-- <th *ngFor="let item of lines[0]; let i = index">Année</th> -->
+                <th>N°</th>
+                <th>LIBELLE</th>
+                <th colspan="2">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let resultat of table_region">
+                <td>{{resultat.id}}</td>
+                <td>{{resultat.libelle_region}}</td>  
+                <td>Modifier</td>                            
+                <td>Supprimer</td>                            
+              </tr>
+            </tbody>
+        </table>
+        
+      </div>
+    </div>
+    
+    
+  </div>
+  
+  
+  

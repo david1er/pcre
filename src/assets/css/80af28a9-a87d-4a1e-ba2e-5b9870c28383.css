@@ -1,0 +1,14 @@
+/**handles:vakka-responsive**/
+/* Medium screen */
+/* Tablet Layout: 768px. */
+/* Mobile Layout: 320px. */
+@media only screen and (max-width: 767px) {
+  .vak-elementor_navigation .vak-mobilMain-menu {
+    display: block !important;
+  }
+  .vak-elementor_navigation .vak-mainMenu, .vak-elementor_navigation ul.vak-mainMenu {
+    display: none !important;
+  }
+}
+
+/* Wide Mobile Layout: 480px. */

@@ -1,0 +1,11 @@
+input[type="number"]{
+    display: inline-block;
+    min-height: 40px;
+    width: 100%;
+    font-size: 14px;
+    line-height: 1.8;
+    padding: 6px 12px;
+    vertical-align: middle;
+    background-color: transparent;
+    color: #333;
+}

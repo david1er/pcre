@@ -1,0 +1,68 @@
+<div class="row">
+  <div class="col-md-3 col-sm-2" style="margin-top:2%;">
+    <app-sidebar></app-sidebar>
+  </div>
+  <div class="col-md-9 col-sm-10" style="margin-top:2%;">
+    <div class="container">
+
+      <h1 class="mt-4">Consultation des resultats</h1>
+     
+
+      <nav class="navbar navbar-light bg-light">
+        <form class="form-inline" method="POST" action="javascript:;">
+          <input class="form-control mr-sm-2" type="number" placeholder="Année" aria-label="Année" id="annee" required>
+          <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" placeholder="Session" name="Session">
+            <option value="Normale">Normale</option>
+            <option value="Malade">Malade</option>
+          </select>
+          <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="examen" [(ngModel)]="examen" (change)="selectInput($event)" required>
+            <option *ngFor="let examen of examens" [value]="examen.libelle_examen" >{{examen.libelle_examen}}</option>
+          </select>
+          <select name="region" id="region" class="custom-select mr-sm-2" id="inlineFormCustomSelect"[(ngModel)]="region" *ngIf="examenSelected === 'CEPD'">Région
+            <option [value]="region.libelle_region" *ngFor="let region of regions">{{region.libelle_region}}</option>
+        </select>
+          <input class="form-control mr-sm-2" type="text" placeholder="N° table" aria-label="N° table" id="numTable" required>
+          <input class="form-control mr-sm-2" type="text" placeholder="Nom" id="nom_prenom">
+            <input type="submit" value="🔍" (click)="getResultAdmin()" class="error-btn button" name="rech">
+        </form>
+      </nav>
+
+      <table class="table table-bordered table-dark mt-5">
+        <thead>
+          <tr>
+            <!-- <th *ngFor="let item of lines[0]; let i = index">Année</th> -->
+            <th>ANNEE</th>
+            <th>EXAMEN</th>
+            <th>REGION</th>
+            <th>JURY</th>
+            <th>N° TABLE</th>
+            <th>NOM & PRENOM</th>
+            <th>DECISION</th>
+            <th>SESSION</th>
+            <th>MENTION</th>
+            <th>SEXE</th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let resultat of table_resultatExamen">
+            <td>{{resultat.annee}}</td>
+            <td>{{resultat.examen}}</td>
+            <td>{{resultat.region}}</td>
+            <td>{{resultat.jury}}</td>
+            <td>{{resultat.num_table}}</td>
+            <td>{{resultat.nom_prenom}}</td>
+            <td>{{resultat.decision}}</td>
+            <td>{{resultat.session}}</td>
+            <td>{{resultat.mention}}</td>
+            <td>{{resultat.sexe}}</td>
+                        
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+  
+</div>
+
+

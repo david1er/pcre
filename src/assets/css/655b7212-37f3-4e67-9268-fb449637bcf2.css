@@ -1,0 +1,374 @@
+/**handles:vakka-progressbar**/
+/*-----------------------
+ HORIZONTAL PROGRESS BAR CSS
+--------------------------*/
+.vakka_progressbar {
+	margin-bottom: 20px;
+}
+.vakka_progressbar p.title {
+	font-family: Montserrat, sans-serif;
+	font-size: 16px;
+	line-height: 20px;
+	margin: 0;
+	padding: 5px 0;
+}
+.vakka_progressbar .bar-container {
+	position: relative;
+	height: 40px;
+	overflow: hidden;
+}
+.vakka_progressbar .bar-container.shadow {
+	-moz-box-shadow: 0px 5px 7px -3px rgba(0,0,0,.5);
+	-webkit-box-shadow: 0px 5px 7px -3px rgba(0,0,0,.5);
+	box-shadow: 0px 5px 7px -3px rgba(0,0,0,.5);
+}
+.vakka_progressbar .backgroundBar {
+	position: absolute;
+	bottom: 0;
+	top: 0;
+	left: 0;
+	right: 0;
+}
+.vakka_progressbar .bar {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+}
+.vakka_progressbar .targetBar {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	-webkit-animation: Animation 2s infinite ease-in-out;
+	-moz-animation: Animation 2s infinite ease-in-out;
+	animation: Animation 2s infinite ease-in-out;
+}
+.vakka_progressbar .targetBar.loader {
+	-webkit-animation: AnimationB 4s infinite ease-in-out;
+	-moz-animation: AnimationB 4s infinite ease-in-out;
+	animation: AnimationB 4s infinite ease-in-out;
+}
+.vakka_progressbar .bar-container.border .bar, .vakka_progressbar .bar-container.border .targetBar, .vakka_progressbar .bar-container.border .backgroundBar {
+	border-bottom: 3px solid rgba(0,0,0,.2);
+}
+.vakka_progressbar .progress-percent {
+	font-family: Montserrat, sans-serif;
+	font-size: 16px;
+	position: absolute;
+	right: 15px;
+}
+
+@keyframes Animation {
+  0%   { opacity:.4; }
+  50%   { opacity:1; }
+  100% { opacity:.4; }
+}
+@-moz-keyframes Animation{
+  0%   { opacity:.4; }
+  50%   { opacity:1; }
+  100% { opacity:.4; }
+}
+@-webkit-keyframes Animation{
+  0%   { opacity:.4; }
+  50%   { opacity:1; }
+  100% { opacity:.4; }
+}
+@keyframes AnimationB {
+  0%   { opacity:.01; }
+  50%   { opacity:.1; }
+  100% { opacity:.01; }
+}
+@-moz-keyframes AnimationB {
+  0%   { opacity:.01; }
+  50%   { opacity:.1; }
+  100% { opacity:.01; }
+}
+@-webkit-keyframes AnimationB {
+  0%   { opacity:.01; }
+  50%   { opacity:.1; }
+  100% { opacity:.01; }
+}
+
+
+/*-----------------------
+[4. Demo-2 CSS]
+--------------------------*/
+.pro-exces {
+  background-color: rgb(34, 34, 34);
+  border-radius: 0;
+  height: 24px;
+  margin: -5px 0 25px;
+  overflow: hidden;
+  position: relative;
+}
+.pro-dev span {
+  border-left: thick double;
+  padding-left: 10px;
+  display: inline-block;
+}
+.pro-dev,.prov-dev-2 {
+	float: left;
+	height: 29px;
+	font-size: 12px;
+	line-height: 32px;
+	position:relative;
+	left: 0px;
+	padding-right: 8px;
+	color: #fff;
+	border-right: thick double;
+	text-align: right;
+}
+.progress-area h6 {
+  color: rgb(255, 255, 255);
+  position: relative;
+  top: 25px;
+  z-index: 5;
+  left: 10px;
+  margin:0;
+}
+/*-----------------------
+[5. Demo-3 CSS]
+--------------------------*/
+.vakka_progressbar .bar:after {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  width: 10px;
+  height: 10px;
+  content: "";
+  background: #fff;
+  border-radius: 50%;
+}
+.vakka_progressbar .progress-percent {
+  color: rgb(255, 255, 255);
+}
+/*-----------------------
+[6. Demo-4 CSS]
+--------------------------*/
+.progress-bar4 {
+  margin: 0 0 10px;
+}
+.progress-title-holder {
+  padding-bottom: 7px;
+  position: relative;
+  margin: 5px 0;
+  font-family: Montserrat, sans-serif;
+  font-size: 15px;
+  line-height: 15px;
+  font-weight: 400;
+  color: #2e2e2e;  
+}
+.progress-title {z-index: 100;}
+.progress-number-wrapper {
+  width: 100%;
+  z-index: 10;
+}
+.progress-number-mark {
+  margin-bottom: 4px;
+  border-radius: 3px;
+  background-color: rgb(22,23,29);
+  padding: 0 8px;
+  position: absolute;
+  bottom: 0;   
+  -moz-transform: translateX(-50%);
+  -o-transform: translateX(-50%);
+  transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  -webkit-transform: translateX(-50%); 
+} 
+.progress-number-wrapper,
+.progress-number-mark {
+  font-family: Open Sans, sans-serif;
+  font-size: 11px;
+  line-height: 24px;
+  letter-spacing: 0px;
+  font-weight: 600;
+  font-style: normal;
+  text-transform: none;
+  color: #ffffff;
+}
+.down-arrow {
+  border-left: 3px solid transparent;
+  border-right: 3px solid transparent;
+  border-top: 3px solid #16171d;
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  -moz-transform: translateX(-50%);
+  -o-transform: translateX(-50%);
+  transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);  
+}
+.progress-content-outter {
+  height: 12px;
+  background-color: #9FB1FB;
+}
+.progress-content {
+  height: 21px;
+  background-color: #337AB7;
+  width: 0%; /* Initial value */
+}
+
+
+
+/*-------------------------------------------------------------------
+								[END]
+--------------------------------------------------------------------*/
+
+
+/*-----------------------
+circle [3. Demo-1 CSS]
+--------------------------*/
+.progress-circle {
+  border-radius: 50%;
+  display: inline-block;
+  width: 12em;
+  height: 12em;
+  position: relative;
+  z-index: auto;
+}
+.progress-circle .outer {
+  background: #dedede;
+  width: 12em;
+  height: 12em;
+  overflow: hidden;
+  z-index: 100;
+}
+.progress-circle .outer .mask {
+  background: #dedede;
+  border-radius: 6em 0 0 6em;
+  position: absolute;
+  width: 6em;
+  height: 12em;
+  top: 0;
+  left: 0;
+  z-index: 120;
+}
+.progress-circle .outer .half {
+  background: rgb(49, 61, 83) none repeat scroll 0 0;
+  box-sizing: border-box;
+  height: 12em;
+  position: absolute;
+  top: 0;
+  width: 6em;
+}
+.progress-circle .outer .half.spinner {
+  border-radius: 0 6em 6em 0;
+  right: 0;
+  z-index: 10;
+  transform-origin: left center;
+  z-index: 110;
+}
+.progress-circle .outer .half.filler {
+  border-radius: 6em 0 0 6em;
+  left: 0;
+  z-index: 5;
+  transform-origin: right center;
+  z-index: 130;
+}
+.progress-circle .inner {
+  background: rgb(255, 255, 255) none repeat scroll 0 0;
+  height: 9em;
+  left: 1.5em;
+  position: absolute;
+  top: 1.5em;
+  transition: all 0.3s ease 0s;
+  width: 9em;
+  z-index: 300;
+}
+.progress-circle .inner:hover  {
+  transform: scale(1.2);
+}
+.progress-circle .percentage{
+  width: 100%;
+  text-align: center;
+  position: absolute;
+  font-size: 2.666666666666667em;
+  font-weight: bold;
+  top: 50%;
+  transform: translateY(-50%);
+  letter-spacing: -0.05em;
+  overflow: hidden;
+  line-height: 1em;
+  z-index: 400;
+}
+.progress-circle .shadow {
+  background: transparent;
+  display: inline-block;
+  border-radius: 50%;
+  position: absolute;
+  width: 12em;
+  height: 12em;
+  top: 0;
+  left: 0;
+  box-shadow: 0 0 1.333333333333333em #000 inset;
+  z-index: 200;
+}
+.progress-circle .inner,
+.progress-circle .outer {
+  display: inline-block;
+  border-radius: 50%;
+}
+
+/*-----------------------
+[6. Demo-4 CSS]
+--------------------------*/
+.css3progress {
+  border: 8px solid rgba(0, 0, 0, 0);
+  border-radius: 100%;
+  display: inline-block;
+  font-variant: small-caps;
+  font-weight: bold;
+  height: 180px;
+  letter-spacing: 0.15em;
+  line-height: 160px;
+  position: relative;
+  text-align: center;
+  width: 180px;
+}
+.css3progress progress{
+  position:fixed;
+  left:-9999px;
+}
+.css3progress::after, .css3progress::before {
+  border-radius: 100%;
+  content: "";
+  height: 100%;
+  left: 0;
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  transform: rotate(90deg);
+  width: 100%;
+}
+p.css3progress {
+  font-size: 30px;
+}
+.css3progress:before {
+ border:transparent solid 8px;
+  border-top-color:#345;
+  animation: progressbg 4s infinite linear;
+  z-index:1;
+  
+}
+.css3progress:after {
+ border:transparent solid 8px;
+  border-top-color:#345;
+  animation: progressfr 4s infinite linear;
+  transform:rotate(10deg);
+}
+@keyframes progressbg {
+    0%  {transform:rotate(10deg);}
+50% {border-color:#0A76B7;}
+  100% { transform:rotate(360deg);}
+}
+@keyframes progressfr {
+    0% {transform:rotate(90deg); }
+50% {border-color:turquoise;}
+  100% {transform:rotate(-270deg)}
+}
+/*-------------------------------------------------------------------
+								[END]
+--------------------------------------------------------------------*/

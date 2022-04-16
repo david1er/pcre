@@ -1,0 +1,30 @@
+<div class="row">
+    <div class="col-md-3 col-sm-2" style="margin-top:2%;">
+      <app-sidebar></app-sidebar>
+    </div>
+    <div class="col-md-9 col-sm-10" style="margin-top:2%;">
+      <div class="container">
+        <h1 class="mt-4">Enrégistrement des resultats</h1>
+        
+        <div class="form-row">
+            <input type="file" #fileImportInput name="File Upload" (change)="csvChanged($event)" id="txtFileUpload">
+        </div>
+        <div class="form-row" style="margin-top: 2%;">
+            <input type="submit" value="Importer"  class="error-btn button">
+        </div>
+            <table class="table table-bordered table-dark mt-5">
+                <thead>
+                    <tr>
+                    <th *ngFor="let item of lines[0]; let i = index">{{item}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of linesR[0]; let i = index">
+                    <td *ngFor="let itemm of lines[0]; let j = index">{{item[j]}}</td>
+                    
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

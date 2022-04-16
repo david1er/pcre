@@ -1,0 +1,68 @@
+poids;taille;Nom Prenom;total_gain;region
+50;1,7;ABALO;15223;maritime
+65;1,6;DAMBE;22632;maritime
+63;1,8;AGOSSOU    Komi Emmanuel ;55384;plateau
+63;1,6;AHIABA    Ami Bertrand ;25629;plateau
+64;1,7;AHIABA  Better;23554;centrale
+75;1,8;AHIABA  Koffi André;23232;kara
+80;1,9;AHIAYE    Kokou Sylvain ;65241;kara
+85;1,6;AHOLOU  Koffi Roland Mawudem;36225;kara
+65;1,8;AHONSOUGLO    Akossiwa Olivia ;65400;kara
+65;1,6;AHOU    Adzo Généviève ;22632;kara
+90;1,7;AKA    Edem Germain ;55384;kara
+65;1,8;AKAKPO  Akossiwa Enyonam;25629;kara
+63;1,9;AKAKPO    Bamiyo ;23554;kara
+63;1,6;AKAKPO-HOUNZAN  Hoalino Benedicte;23232;kara
+64;1,8;AKAKPO    Mawuli Alexandre Isaac ;65241;kara
+75;1,6;AKAKPO  Yao Josué;36225;kara
+80;1,7;AKAMAH  Yaovi Jean;22632;kara
+85;1,8;AKAME  Koffi gérant;55384;kara
+65;1,9;AKIBODE    Rebecca Apéafa ;25629;kara
+65;1,5;AKLIKOKOU    Ayawavi Delali Armandine ;23554;kara
+65;1,6;AKOTIA    Adjo Mawunyo ;23232;maritime
+65;1,5;AKOTIA    Kokou Mawulolo Amétéfé ;65241;maritime
+90;1,9;AKOTSE    Komi Réné;36225;maritime
+65;1,6;AKOU    Délali Blessing Esther ;65400;maritime
+63;1,5;AKOUETE    Kékéli Manuella ;22632;maritime
+63;1,5;AKPABLI  Paul;55384;maritime
+64;1,5;AKPE  Igne Stanislas;25629;maritime
+75;1,5;AKPO    Adjara ;23554;maritime
+80;1,6;ALIDJINOU    Edem Aba Siméon ;23232;maritime
+85;1,4;ALIFO    Yawa Wonder ;65241;maritime
+64;1,7;ALONMADON  Kodjogan Daniel  ;65447;maritime
+75;1,8;ALOUWE  Yawo Daniel ;52544;centrale
+80;1,9;ALOWODO    Afi Madéleine ;95442;centrale
+85;1,6;AMAGLO    Komi Senyo Junior ;25448;centrale
+65;1,8;AMEDEOLE  Atchoupé;25629;centrale
+65;1,6;AMEGAN  Essi Brillèle ;23554;centrale
+90;1,7;AMEGA  Yawa Romualde;23232;savanes
+65;1,8;AMEGBEGNUIE    Komla Alexis ;65241;savanes
+63;1,9;AMEKOE  Ami Gentille;36225;savanes
+63;1,6;AMEKULAFE  Gracia Kezia;65400;savanes
+64;1,8;AMENYOGBE    Kodzogan Franck;22632;savanes
+75;1,6;AMESSEH    Hodogbe Ayaovi Gautier  ;55384;savanes
+80;1,7;AMETO    Adjo Kekeli ;25629;savanes
+85;1,8;AMEVIVI    Komla Sébastien ;23554;plateaux
+65;1,9;AMEVO  Afi Bénédicte;23232;plateaux
+65;1,5;AMEVOR    Kodjo Pierre ;65241;savanes
+65;1,6;AMEWU  Adzo Martine ;36225;savanes
+65;1,5;AMEZOUWUI    Kokouvi Jean ;22632;savanes
+90;1,9;AMOUZOU  Afi;55384;savanes
+65;1,6;AMOUZOUGAN    Kayi Bella;25629;savanes
+63;1,5;AMU  Abra Sandrine ;23554;savanes
+63;1,9;AMUZUVI  Kossi Mathieu ;23232;savanes
+63;1,6;APETCHO    Afi Esther ;65241;savanes
+64;1,8;APETI    Komla Ekoé ;23232;savanes
+75;1,6;ASAWA  Adjo Beneser ;65241;maritime
+80;1,7;ASSI    Akouvi Olivia ;36225;maritime
+85;1,8;ASSIGNO  Komla Paul;22632;maritime
+65;1,9;ASSIMA    Essi Gloria Imella ;55384;maritime
+65;1,5;ASSIMEDO    Akou Sandra ;25629;maritime
+65;1,6;ASSITO    Akouvi Emilie ;23554;maritime
+65;1,5;ATANDA  Adetoby Steven;23232;maritime
+90;1,9;ATANDJI AZONLI  Adjo Gloria;65241;maritime
+65;1,6;ATIGAN    Israël ;36225;centale
+63;1,5;ATIGO    Eya Bénédicte ;65400;centale
+63;1,5;ATIGO    Kodzo François;22632;centale
+64;1,5;ATIMAKA  Adjovi;55384;centale
+75;1,5;ATIMAKA  Amè Parfaite;25629;centale

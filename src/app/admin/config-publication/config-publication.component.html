@@ -1,0 +1,100 @@
+<!-- fenetre modale pour modification -->
+
+<!-- Button trigger modal -->
+<!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Launch demo modal
+</button> -->
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="row">
+    <div class="col-md-3 col-sm-2" style="margin-top:2%;">
+      <app-sidebar></app-sidebar>
+    </div>
+    <div class="col-md-9 col-sm-10" style="margin-top:2%;">
+      <div class="container">
+  
+        <h1 class="mt-4">Configuration des dates de publication</h1>
+          <div class="alert alert-success" role="alert" *ngIf="message">
+            {{message}}
+          </div>
+        <div class="" style="margin-top: 2%;">
+            <div>
+                <form role="config" method="POST" action="javascript:;">
+                    <div class="form-row row">
+                      <div class="form-group col-md-8">
+                        <label for="examen">Examen :</label>
+                        <select name="examen" id="examen" class="field" autocomplete="off" [(ngModel)]="newConfig.examen">Examen
+                            <option *ngFor="let examen of examens" [value]="examen.libelle_examen" >{{examen.libelle_examen}}</option>
+                        </select>
+                      </div>
+                      <div class="form-group col-md-3">
+                        <label for="position">Position :</label>
+                        <input type="number" class="field" id="position" [(ngModel)]="newConfig.position" name="position"> 
+                      </div>
+                    </div>
+                    <div class="row">
+                        <label for="date_debut">Date de début de publication :</label>
+                        <input type="date" class="field" id="date_debut" [(ngModel)]="newConfig.date_publicationDebut" name="date_publicationDebut"> 
+                    </div>
+                    <div class="row">
+                        <label for="date_fin">Date de fin de publication :</label>
+                        <input type="date" class="field" id="date_fin" [(ngModel)]="newConfig.date_publicationFin" name="date_publicationFin"> 
+                    </div>
+                    <div style="margin-top: 2%;">
+                        <input type="submit" value="Valider" (click)="addConfig()" class="error-btn button">
+                    </div>
+                </form>
+                
+            </div>
+        </div>
+        <table class="table table-bordered table-dark mt-5">
+            <thead>
+              <tr>
+                <th>Position</th>
+                <th>Examen</th>
+                <th>Debut</th>
+                <th>Fin</th>
+                <th>Etat</th>
+                <th colspan="2">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let config of table_config">
+                <td>{{config.position}}</td>
+                <td>{{config.examen}}</td>
+                <td>{{config.date_publicationDebut}}</td>                            
+                <td>{{config.date_publicationFin}}</td>                            
+                <td>{{config.etat}}</td>                            
+                <td><button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">Modifier</button></td>                            
+                <td> <button (click)="deleteConfig(config)" class="btn btn-danger">Supprimer</button> </td>                            
+              </tr>
+            </tbody>
+        </table>
+        
+      </div>
+    </div>
+    
+    
+  </div>
+
+  
