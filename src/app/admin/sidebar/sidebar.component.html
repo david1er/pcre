@@ -9,32 +9,36 @@
            class="list-group-item list-group-item-action py-2 ripple"
            aria-current="true"
            >
-          <i class="fas fa-tachometer-alt fa-fw me-3"></i
-            ><span>Tableau de bord</span>
+          <i class="fa fa-tachometer" aria-hidden="true"></i
+            >&nbsp;<span>Tableau de bord</span>
         </a>
         <a
             routerLink="/admin/add-file"
-           class="list-group-item list-group-item-action py-2 ripple active"
+            routerLinkActive="active"
+           class="list-group-item list-group-item-action py-2 ripple"
            >
-          <i class="fas fa-chart-area fa-fw me-3"></i
-            ><span>Administation</span>
+          <i class="fa fa-table" aria-hidden="true"></i
+            >&nbsp;<span>Administation</span>
         </a>
         <a
           routerLink="/admin/logs"
+          routerLinkActive="active"
            class="list-group-item list-group-item-action py-2 ripple"
-           ><i class="fas fa-lock fa-fw me-3"></i><span>Log</span></a
+           ><i class="fa fa-id-badge" aria-hidden="true"></i>&nbsp;<span>Log</span></a
           >
         <a
           routerLink="/admin/stat"
+          routerLinkActive="active"
            class="list-group-item list-group-item-action py-2 ripple"
-           ><i class="fas fa-chart-line fa-fw me-3"></i
-          ><span>Statistique</span></a
+           ><i class="fa fa-bar-chart" aria-hidden="true"></i
+          >&nbsp;<span>Statistique</span></a
           >
         <a
         routerLink="/admin/import-file"
+        routerLinkActive="active"
            class="list-group-item list-group-item-action py-2 ripple"
            >
-          <i class="fas fa-chart-pie fa-fw me-3"></i><span>Ajout de Fichier</span>
+          <i class="fa fa-download" aria-hidden="true"></i>&nbsp;<span>Ajout de Fichier</span>
         </a>
         <!-- <a
            href="#"
@@ -43,14 +47,16 @@
           > -->
         <a
            routerLink="/admin/regionEducative"
+           routerLinkActive="active"
            class="list-group-item list-group-item-action py-2 ripple"
-           ><i class="fas fa-chart-bar fa-fw me-3"></i><span>Liste des regions</span></a
+           ><i class="fa fa-map-signs" aria-hidden="true"></i>&nbsp;<span>Liste des regions</span></a
           >
         <a
             routerLink="/admin/config"
+            routerLinkActive="active"
            class="list-group-item list-group-item-action py-2 ripple"
-           ><i class="fas fa-globe fa-fw me-3"></i
-          ><span>Edition de date</span></a
+           ><i class="fa fa-pencil-square-o" aria-hidden="true"></i
+          >&nbsp;<span>Edition de date</span></a
           >
         <!-- <a
            href="#"
@@ -61,8 +67,8 @@
         <a
            href="#"
            class="list-group-item list-group-item-action py-2 ripple"
-           ><i class="fas fa-calendar fa-fw me-3"></i
-          ><span>Calendrier</span></a
+           ><i class="fa fa-calendar" aria-hidden="true"></i
+          >&nbsp;<span>Calendrier</span></a
           >
       </div>
     </div>

@@ -28,7 +28,16 @@ import { GestionLogComponent } from './admin/gestion-log/gestion-log.component';
 import { StatistiqueComponent } from './admin/statistique/statistique.component';
 import { CalendarComponent } from './admin/calendar/calendar.component';
 import { ImportFileComponent } from './admin/import-file/import-file.component';
-
+import { StepComponent } from './step/step.component';
+import { DatePublicationGeneraleComponent } from './admin/date-publication-generale/date-publication-generale.component';
+import { NgxCsvParserModule } from 'ngx-csv-parser';
+import { ImportFile2Component } from './admin/import-file2/import-file2.component';
+import { StepCEPDComponent } from './resultatCEPD/step-cepd/step-cepd.component';
+import { ConsultationCEPDComponent } from './resultatCEPD/consultation-cepd/consultation-cepd.component';
+import { StepBEPCComponent } from './resultatBEPC/step-bepc/step-bepc.component';
+import { ConsultationBEPCComponent } from './resultatBEPC/consultation-bepc/consultation-bepc.component';
+import { StepBACIComponent } from './resultatBACI/step-baci/step-baci.component';
+import { ConsultationBACIComponent } from './resultatBACI/consultation-baci/consultation-baci.component';
 
 
 
@@ -50,14 +59,24 @@ import { ImportFileComponent } from './admin/import-file/import-file.component';
     GestionLogComponent,
     StatistiqueComponent,
     CalendarComponent,
-    ImportFileComponent
+    ImportFileComponent,
+    StepComponent,
+    DatePublicationGeneraleComponent,
+    ImportFile2Component,
+    StepCEPDComponent,
+    ConsultationCEPDComponent,
+    StepBEPCComponent,
+    ConsultationBEPCComponent,
+    StepBACIComponent,
+    ConsultationBACIComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxCsvParserModule
   ],
   providers: [{ provide: LOCALE_ID, useValue: "fr-FR" }],
   bootstrap: [AppComponent]

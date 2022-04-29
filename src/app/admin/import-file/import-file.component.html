@@ -6,7 +6,7 @@
       <div class="container">
         <h1 class="mt-4">Enrégistrement des resultats</h1>
         
-        <div class="form-row">
+        <!-- <div class="form-row">
             <input type="file" #fileImportInput name="File Upload" (change)="csvChanged($event)" id="txtFileUpload">
         </div>
         <div class="form-row" style="margin-top: 2%;">
@@ -24,7 +24,82 @@
                     
                     </tr>
                 </tbody>
-            </table>
+            </table> -->
+
+            
+<div class="csv-file-chooser-section">
+ 
+    <div class="form-group row mb-3">
+       <div class="row">
+          <label class="col-form-label-lg" for="examen">Examen :</label>
+          <select name="examen" id="examen" class="form-select form-select-lg mb-3 border border-2" autocomplete="off" (change)="selectInput($event)">Examen
+              <option *ngFor="let examen of examens" [value]="examen.libelle_examen" >{{examen.libelle_examen}}</option>
+          </select>
+        </div>  
+        <div class="row">
+          <label class="col-form-label-lg">Parse Headers?</label>
+          <select aria-placeholder="Parse headers?" [(ngModel)]="header" class="form-select form-select-lg mb-3 border border-2">
+              <option [value]="true">Oui</option>
+              <option [value]="false">Non</option>
+          </select>
+          <input type="file" #fileImportInput name="File Upload" id="csvFileUpload" (change)="fileChangeListener($event)"
+    accept=".csv" />
+        </div>
+    </div>
+  
+    
+</div>
+
+<div class="table csv-result-table">
+
+  <table>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Année</th>
+        <th>Date de nais.</th>
+        <th>Decision</th>
+        <th>Examen</th>
+        <th>Jury</th>
+        <th>Nom & Prénoms</th>
+        <th>N° table</th>
+        <th>Série</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let csvData of csvRecords;let i = index;">
+
+        <td>{{i+1}}</td>
+        <td>
+          <span>{{csvData.annee}}</span>
+        </td>
+        <td>
+          <span>{{csvData.date_naissance}}</span>
+        </td>
+        <td>
+          <span>{{csvData.decision}}</span>
+        </td>
+        <td>
+          <span>{{csvData.examen}}</span>
+        </td>
+        <td>
+          <span>{{csvData.jury}}</span>
+        </td>
+        <td>
+          <span>{{csvData.nom_prenom}}</span>
+        </td>
+        <td>
+          <span>{{csvData.num_table}}</span>
+        </td>
+        <td>
+          <span>{{csvData.serie_filiere}}</span>
+        </td>
+
+      </tr>
+    </tbody>
+  </table>
+
+</div>
         </div>
     </div>
 </div>

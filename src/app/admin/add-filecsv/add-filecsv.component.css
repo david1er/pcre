@@ -31,6 +31,9 @@
   }
 
 .mr-sm-2{
-  width: 15%;
+  /*width: 35%;*/
   margin-right: 1%;
+}
+input[type=number]{
+  max-width: 100%;
 }

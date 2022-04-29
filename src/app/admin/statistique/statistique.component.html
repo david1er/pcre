@@ -4,7 +4,39 @@
     </div>
     <div class="col-md-9 col-sm-10" style="margin-top:2%;">
       <div class="container">
-        <p>Statistiques par examen et par années</p>
-        </div>
+        <p class="fs-3">Statistiques par examen et par années</p>
+      </div>
+      <table class="table table-hover">
+        <thead>
+          <tr>
+              <th>Examen</th>
+              <th>Année</th>
+              <th>Total</th>
+          </tr>
+          </thead>
+          <tbody>
+              <tr style="font-size: 2em;" *ngFor="let result of table_statistiqueCEPD">
+                <td>{{result.examen}}</td>
+                <td>{{result.annee}}</td>
+                <td>{{result.total}}</td>
+              </tr>
+              <tr style="font-size: 2em;" *ngFor="let result of table_statistiqueBEPC">
+                <td>{{result.examen}}</td>
+                <td>{{result.annee}}</td>
+                <td>{{result.total}}</td>
+              </tr>
+              <tr style="font-size: 2em;" *ngFor="let result of table_statistiqueBACI">
+                <td>{{result.examen}}</td>
+                <td>{{result.annee}}</td>
+                <td>{{result.total}}</td>
+              </tr>
+              <tr style="font-size: 2em;" *ngFor="let result of table_statistiqueBACII">
+                <td>{{result.examen}}</td>
+                <td>{{result.annee}}</td>
+                <td>{{result.total}}</td>
+              </tr>
+
+          </tbody>
+      </table>
     </div>
 </div>

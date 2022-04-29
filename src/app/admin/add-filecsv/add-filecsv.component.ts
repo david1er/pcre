@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { ResultatExamen } from '../../Model/Resultat'
 import { ResultatService } from '../resultat.service';
 import { Region } from 'src/app/Model/Region';
@@ -28,10 +28,11 @@ export class AddFilecsvComponent implements OnInit {
   regions!:Region[];
   examens!:Examen[];
   examenSelected = 'CEPD';
-  numTable: number=0;
+  num_table: number=0;
   annee: number=0;
   nom_prenom: string="";
   region: string="";
+  type_enseignement: string="";
   examen: string="";
   zone: string="";
 
@@ -87,32 +88,212 @@ getResultAdmin(){
   //this.examen=(<HTMLInputElement>document.getElementById("examen")).value;
   //this.region=(<HTMLInputElement>document.getElementById("region")).value;
   this.annee=parseInt((<HTMLInputElement>document.getElementById("annee")).value);
-  this.numTable=parseInt((<HTMLInputElement>document.getElementById("numTable")).value);
+  ////this.num_table=parseInt((<HTMLInputElement>document.getElementById("num_table")).value);
   console.log('annee===>',this.annee);
   console.log('nom===>',this.nom_prenom);
   console.log('examen===>',this.examen);
-  if(this.annee!=0 && this.examen!=""){
-    this.resultatService.getResultAdminUAPIUrl(this.annee,this.examen,this.numTable).toPromise().then(data=>{
-      console.log('recherche U===>',data);
+  console.log('region===>',this.region);
+  if(this.examenSelected=='CEPD'){
+    if((this.annee != 0) && (this.examen != "") && (this.num_table != 0) && (this.region == "") && (this.nom_prenom == "")){
+      console.log("dans CEPD1 le numtable==>",this.num_table);
+      console.log("dans CEPD1 le annee==>",this.annee);
+      console.log("dans CEPD1 le nom_prenom==>",this.nom_prenom);
+      this.resultatService.getResultAdminCEPD1APIUrl(this.annee,this.examen,this.num_table).toPromise().then(data=>{
+        console.log('recherche CEPD1 U===>',data);
       
-      this.table_resultatExamen=data;
-    })
-  }
-  else if(this.annee!=0){
-    this.resultatService.getResultAdminTAPIUrl(this.annee,this.nom_prenom).toPromise().then(data=>{
-      console.log('recherche T===>',data);
+        this.table_resultatExamen=data;
+      },(error:HttpErrorResponse)=>{alert(error.message);})
+    }
+    else if(this.annee!=0 && this.nom_prenom!=""){
+      this.resultatService.getResultAdminCEPD3APIUrl(this.annee,this.nom_prenom).toPromise().then(data=>{
+        console.log('recherche CEPD3 T===>',data);
+        
+        this.table_resultatExamen=data;
+      },(error:HttpErrorResponse)=>{alert(error.message);})
+    }
+    else if(this.examen != "" && this.annee != 0 && this.nom_prenom != ""){
+      this.resultatService.getResultAdminCEPD4APIUrl(this.annee,this.examen,this.nom_prenom).toPromise().then(data=>{
+        console.log('recherche CEPD4 Q===>',data);
+        
+        this.table_resultatExamen=data;
+      },(error:HttpErrorResponse)=>{alert(error.message);})
+  
+    }
+    else if(this.examen!="" && this.annee!=0 && this.region==" "){
+      this.resultatService.getResultAdminCEPD5APIUrl(this.annee,this.examen).toPromise().then(data=>{
+        console.log('recherche CEPD5 C===>',data);
+        
+        this.table_resultatExamen=data;
+      },(error:HttpErrorResponse)=>{alert(error.message);})
+  
+    }else if((this.annee != 0) && (this.examen != "") && (this.region != "") && (this.num_table != 0) && (this.nom_prenom == "")){
+      console.log("dans CEPD1 le numtable==>",this.num_table);
+      console.log("dans CEPD1 le annee==>",this.annee);
+      console.log("dans CEPD1 le region==>",this.region);
+      this.resultatService.getResultAdminCEPD6APIUrl(this.annee,this.examen,this.region,this.num_table).toPromise().then(data=>{
+        console.log('recherche CEPD6 S===>',data);
       
-      this.table_resultatExamen=data;
-    })
-  }
-  else if(this.examen!="" && this.annee!=0 && this.nom_prenom!=""){
-    this.resultatService.getResultAdminQAPIUrl(this.annee,this.examen,this.nom_prenom).toPromise().then(data=>{
-      console.log('recherche Q===>',data);
+        this.table_resultatExamen=data;
+      },(error:HttpErrorResponse)=>{alert(error.message);})
+    }
+    else{
+      this.table_resultatExamen=[];
+    }
+  }if(this.examenSelected=='BEPC'){
+    alert("bepcc");
+    if((this.annee != 0) && (this.examen != "") && (this.num_table != 0) && (this.nom_prenom == "")){
+      console.log("dans BEPC1 le numtable==>",this.num_table);
+      console.log("dans BEPC1 le annee==>",this.annee);
+      console.log("dans BEPC1 le nom_prenom==>",this.nom_prenom);
+      this.resultatService.getResultAdminBEPC1APIUrl(this.annee,this.examen,this.num_table).toPromise().then(data=>{
+        console.log('recherche BEPC1 U===>',data);
       
-      this.table_resultatExamen=data;
-    })
+        this.table_resultatExamen=data;
+      },(error:HttpErrorResponse)=>{alert(error.message);})
+    }
+    else if(this.annee!=0 && this.nom_prenom!=""){
+      this.resultatService.getResultAdminBEPC3APIUrl(this.annee,this.nom_prenom).toPromise().then(data=>{
+        console.log('recherche BEPC3 T===>',data);
+        
+        this.table_resultatExamen=data;
+      },(error:HttpErrorResponse)=>{alert(error.message);})
+    }
+    else if(this.examen != "" && this.annee != 0 && this.nom_prenom != ""){
+      this.resultatService.getResultAdminBEPC4APIUrl(this.annee,this.examen,this.nom_prenom).toPromise().then(data=>{
+        console.log('recherche BEPC4 Q===>',data);
+        
+        this.table_resultatExamen=data;
+      },(error:HttpErrorResponse)=>{alert(error.message);})
+  
+    }
+    else if(this.examen!="" && this.annee!=0 && this.region==" "){
+      this.resultatService.getResultAdminBEPC5APIUrl(this.annee,this.examen).toPromise().then(data=>{
+        console.log('recherche BEPC5 C===>',data);
+        
+        this.table_resultatExamen=data;
+      },(error:HttpErrorResponse)=>{alert(error.message);})
+  
+    }
+    else{
+      this.table_resultatExamen=[];
+    }
 
+  }if(this.examenSelected=='BACI'){
+    alert("baci");
+    if((this.annee != 0) && (this.examen != "") && (this.num_table != 0) && (this.nom_prenom == "")){
+      console.log("dans BACI1 le numtable==>",this.num_table);
+      console.log("dans BACI1 le annee==>",this.annee);
+      console.log("dans BACI1 le nom_prenom==>",this.nom_prenom);
+      this.resultatService.getResultAdminBACI1APIUrl(this.annee,this.examen,this.num_table).toPromise().then(data=>{
+        console.log('recherche BACII1 U===>',data);
+      
+        this.table_resultatExamen=data;
+      },(error:HttpErrorResponse)=>{alert(error.message);})
+    }
+    else if(this.annee!=0 && this.nom_prenom!=""){
+      this.resultatService.getResultAdminBACI3APIUrl(this.annee,this.nom_prenom).toPromise().then(data=>{
+        console.log('recherche BACI3 T===>',data);
+        
+        this.table_resultatExamen=data;
+      },(error:HttpErrorResponse)=>{alert(error.message);})
+    }
+    else if(this.examen != "" && this.annee != 0 && this.nom_prenom != ""){
+      this.resultatService.getResultAdminBACI4APIUrl(this.annee,this.examen,this.nom_prenom).toPromise().then(data=>{
+        console.log('recherche BACI4 Q===>',data);
+        
+        this.table_resultatExamen=data;
+      },(error:HttpErrorResponse)=>{alert(error.message);})
+  
+    }
+    else if(this.examen!="" && this.annee!=0 && this.region==" "){
+      this.resultatService.getResultAdminBACI5APIUrl(this.annee,this.examen).toPromise().then(data=>{
+        console.log('recherche BACI5 C===>',data);
+        
+        this.table_resultatExamen=data;
+      },(error:HttpErrorResponse)=>{alert(error.message);})
+  
+    }
+    else{
+      this.table_resultatExamen=[];
+    }
+  }if(this.examenSelected=='BACII'){
+    alert("bacii");
+    if((this.annee != 0) && (this.examen != "") && (this.num_table != 0) && (this.nom_prenom == "")){
+      console.log("dans BACII1 le numtable==>",this.num_table);
+      console.log("dans BACII1 le annee==>",this.annee);
+      console.log("dans BACII1 le nom_prenom==>",this.nom_prenom);
+      this.resultatService.getResultAdminBACII1APIUrl(this.annee,this.examen,this.num_table).toPromise().then(data=>{
+        console.log('recherche BACII1 U===>',data);
+      
+        this.table_resultatExamen=data;
+      },(error:HttpErrorResponse)=>{alert(error.message);})
+    }
+    else if(this.annee!=0 && this.nom_prenom!=""){
+      this.resultatService.getResultAdminBACII3APIUrl(this.annee,this.nom_prenom).toPromise().then(data=>{
+        console.log('recherche BACII3 T===>',data);
+        
+        this.table_resultatExamen=data;
+      },(error:HttpErrorResponse)=>{alert(error.message);})
+    }
+    else if(this.examen != "" && this.annee != 0 && this.nom_prenom != ""){
+      this.resultatService.getResultAdminBACII4APIUrl(this.annee,this.examen,this.nom_prenom).toPromise().then(data=>{
+        console.log('recherche BACII4 Q===>',data);
+        
+        this.table_resultatExamen=data;
+      },(error:HttpErrorResponse)=>{alert(error.message);})
+  
+    }
+    else if(this.examen!="" && this.annee!=0 && this.region==" "){
+      this.resultatService.getResultAdminBACII5APIUrl(this.annee,this.examen).toPromise().then(data=>{
+        console.log('recherche BACII5 C===>',data);
+        
+        this.table_resultatExamen=data;
+      },(error:HttpErrorResponse)=>{alert(error.message);})
+  
+    }
+    else{
+      this.table_resultatExamen=[];
+    }
+  }else{
+    alert("ohooooo");
   }
+
+
+
+  // if(this.annee!=0 && this.examen!="" && this.num_table!=0 && this.nom_prenom==""){
+  //   console.log("dans un le numtable==>",this.num_table)
+  //   this.resultatService.getResultAdminUAPIUrl(this.annee,this.examen,this.num_table).toPromise().then(data=>{
+  //     console.log('recherche U===>',data);
+      
+  //     this.table_resultatExamen=data;
+  //   },(error:HttpErrorResponse)=>{alert(error.message);})
+  // }
+  // else if(this.annee!=0 && this.nom_prenom!=""){
+  //   this.resultatService.getResultAdminTAPIUrl(this.annee,this.nom_prenom).toPromise().then(data=>{
+  //     console.log('recherche T===>',data);
+      
+  //     this.table_resultatExamen=data;
+  //   },(error:HttpErrorResponse)=>{alert(error.message);})
+  // }
+  // else if(this.examen!="" && this.annee!=0 && this.nom_prenom!=""){
+  //   this.resultatService.getResultAdminQAPIUrl(this.annee,this.examen,this.nom_prenom).toPromise().then(data=>{
+  //     console.log('recherche Q===>',data);
+      
+  //     this.table_resultatExamen=data;
+  //   },(error:HttpErrorResponse)=>{alert(error.message);})
+
+  // }
+  // else if(this.examen!="" && this.annee!=0){
+  //   this.resultatService.getResultAdminCAPIUrl(this.annee,this.examen).toPromise().then(data=>{
+  //     console.log('recherche C===>',data);
+      
+  //     this.table_resultatExamen=data;
+  //   },(error:HttpErrorResponse)=>{alert(error.message);})
+
+  // }
+  // else{
+  //   this.table_resultatExamen=[];
+  // }
   
   
 } 

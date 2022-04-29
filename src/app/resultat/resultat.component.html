@@ -23,7 +23,9 @@
     </div><!-- .page-header-inner -->
 </header><!-- .page-header -->
 
-<div id="content-wrap" class="container clr">
+
+
+<div id="content-wrap" class="container clr" *ngIf="show">
 
     <div id="primary" class="content-area clr">
 
@@ -33,33 +35,33 @@
                     <div class="elementor-widget-container">
                         <h2 class="elementor-heading-title elementor-size-default">Rechercher vos résultats des examens scolaires </h2>
                     </div>
-                        <div class="row" style="margin-top: 5%;">
+                        <div class="row" style="margin-top: 3%;">
                             <div>
                                 <form role="search" method="POST" class="searchform" action="javascript:;">
                                     <div class="row">
-                                        <label for="examen">Votre Examen :</label>
-                                        <select name="examen" id="examen" class="field" autocomplete="off" (change)="selectInput($event)">Examen
+                                        <label class="col-form-label-lg" for="examen">Selectionnez votre Examen :</label>
+                                        <select name="examen" id="examen" class="field border border-2" autocomplete="off" (change)="selectInput($event)">Examen
                                             <option *ngFor="let examen of examens" [value]="examen.libelle_examen" >{{examen.libelle_examen}}</option>
                                         </select>
                                     </div>
                                     <div class="row" *ngIf="examenSelected === 'CEPD'">
-                                        <label for="region">Votre Région :</label>
-                                        <select name="region" id="region" class="field" autocomplete="off" [(ngModel)]="zone">Région
+                                        <label class="col-form-label-lg" for="region">Choisir votre Région :</label>
+                                        <select name="region" id="region" class="field border border-2" autocomplete="off" [(ngModel)]="zone">Région
                                             <option [value]="region.libelle_region" *ngFor="let region of regions">{{region.libelle_region}}</option>
                                         </select>
                                     </div>
-                                    <div class="row" *ngIf="examenSelected === 'BACI' || examenSelected === 'BACII' || examenSelected === 'CAP'">
-                                        <label for="typeEnseignement">Type d'enseignement</label>  
-                                        <select name="categ" id="categ" class="field" autocomplete="off" >
+                                    <div class="row" *ngIf="examenSelected === 'BACI'">
+                                        <label class="col-form-label-lg" for="typeEnseignement">Selectionnez votre Type d'enseignement :</label>  
+                                        <select name="categ" id="categ" class="field border border-2" autocomplete="off" [(ngModel)]="type_enseignement" >
                                             <option value="général">Enseignement Général</option>
                                             <option value="technique">Enseignement Technique</option>
                                         </select> 
                                     </div>
                                     <div class="row">
-                                        <label for="numTable">N° table</label>
-                                        <input type="search" id="numTable" class="field" autocomplete="off"
+                                        <label class="col-form-label-lg" for="numTable">Entrez votre N° de table :</label>
+                                        <input type="search" max=99999 id="numTable" class="form-control border border-2" autocomplete="off"
                                             placeholder="Saisissez votre numéro de table" [(ngModel)]="numTable" name="recherche">
-                                        <input TYPE="submit" VALUE="Rechercher" (click)="getResult()" class="error-btn button">
+                                        <input TYPE="submit" type="reset" VALUE="Rechercher" (click)="getResult()" class="error-btn button">
                                     </div>
                                 </form>
                                 <div style="margin-top: 5%;">
@@ -79,17 +81,21 @@
                                     </thead>
                                     <tbody>
                                         <tr style="font-size: 2em;">
-                                            <td style="color: blue;" >{{result.num_table}}</td>
+                                            <td style="color: #0F97D0;" >{{result.num_table}}</td>
                                             <td>{{result.nom_prenom}}</td>
                                             <td>{{result.centre_decrit}}</td>
                                             <td *ngIf="result.decision=='Ajourné(e)'" style="color: red;" >{{result.decision}}</td>
                                             <td *ngIf="result.decision=='Admis(e)'" style="color: green;" >{{result.decision}}</td>
+                                            <td *ngIf="!(result.decision=='Admis(e)' || result.decision=='Ajourné(e)')">{{result.decision}}</td>
                                         </tr>
 
                                     </tbody>
 
-                                </table>
-                        </div>
+                                </table>    
+                            </div>
+                            <div *ngIf="table_resultatExamen?.length==0" class="alert alert-primary text-center col-form-label-lg" role="alert">
+                                Aucune information fournie !!!
+                            </div>
 
                     <a class="error-btn button" href="https://education.gouv.tg/">Revenir à l’accueil</a>
                 </div><!-- .error404-content -->

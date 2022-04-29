@@ -1,4 +1,13 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { ViewChild } from '@angular/core';
+import { NgxCsvParser } from 'ngx-csv-parser';
+import { NgxCSVParserError } from 'ngx-csv-parser';
+import { Examen } from 'src/app/Model/Examen';
+import { FicheExamenCEPD } from 'src/app/Model/FicheExamenCEPD';
+import { FicheExamenBEPC } from 'src/app/Model/FicheExamenBEPC';
+import { FicheExamenBACI } from 'src/app/Model/FicheExamenBACI';
+import { ResultatService } from '../resultat.service';
 
 @Component({
   selector: 'app-import-file',
@@ -7,179 +16,113 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class ImportFileComponent implements OnInit {
-  fileUtil: any;
-  utilService: any;
   csvRecords: any;
-  external_contacts_arr: any;
+  header = false;
+  message:string="";
   
-  constructor() { }
-  //array varibales to store csv data
-  lines = []; //for headings
-  linesR = []; // for rows
+  id_fiche_examen: number=0;
+  annee: number=0;
+  centre_decrit: string="";
+  date_naissance: Date=new Date();
+  decision: string="";
+  ets_provenance: string="";
+  examen: string="";
+  jury: number=0;
+  lieu_naiss: string="";
+  mention: string="";
+  moyenne: number=0;
+  nom_prenom: string="";
+  num_table: number=0;
+  region: string="";
+  serie_filiere: string="";
+  session: string="";
+  sexe: string="";
+  type_enseignement: string="";
+  newFicheExamenCEPD = new FicheExamenCEPD(this.id_fiche_examen,this.annee,this.centre_decrit,this.date_naissance,this.decision,this.ets_provenance,this.examen,this.jury,this.lieu_naiss,this.mention,this.moyenne,this.nom_prenom,this.num_table,this.region,this.serie_filiere,this.session,this.sexe,this.type_enseignement);
+  newFicheExamenBEPC = new FicheExamenBEPC(this.id_fiche_examen,this.annee,this.centre_decrit,this.date_naissance,this.decision,this.ets_provenance,this.examen,this.jury,this.lieu_naiss,this.mention,this.moyenne,this.nom_prenom,this.num_table,this.region,this.serie_filiere,this.session,this.sexe,this.type_enseignement);
+  newFicheExamenBACI = new FicheExamenBACI(this.id_fiche_examen,this.annee,this.centre_decrit,this.date_naissance,this.decision,this.ets_provenance,this.examen,this.jury,this.lieu_naiss,this.mention,this.moyenne,this.nom_prenom,this.num_table,this.region,this.serie_filiere,this.session,this.sexe,this.type_enseignement);
   
-  
+  examens!:Examen[];
+  examenSelected = 'CEPD';
 
-  //File upload function
-  changeListener(files: FileList){
-    console.log(files);
-   //  if(files && files.length > 0) {
-   //     let file : File = files.item(0); 
-   //       console.log(file.name);
-   //       console.log(file.size);
-   //       console.log(file.type);
-   //       let reader: FileReader = new FileReader();
-   //       reader.readAsText(file);
-   //       reader.onload = (e) => {
-   //        let csv: any = reader.result;
-   //        let allTextLines = [];
-   //        allTextLines = csv.split(/\r|\n|\r/);
-   //       // console.log(allTextLines);
-
-   //       //Table Headings
-   //        let headers = allTextLines[0].split(';');
-   //        let data = headers;
-   //        let tarr = [];
-   //        for (let j = 0; j < headers.length; j++) {
-   //          tarr.push(data[j]);
-   //        }
-   //        //Pusd headinf to array variable
-   //        this.lines.push(tarr);
-          
-         
-   //        // Table Rows
-   //        let tarrR = [];
-
-   //        //Create formdata object
-   //        var myFormData = new FormData();
-   //        let arrl = allTextLines.length;
-   //        let rows = [];
-          
-   //        for(let i = 1; i < arrl; i++){
-   //        rows.push(allTextLines[i].split(';'));
-   //        if(allTextLines[i]!=""){
-
-   //        // Save file data into formdata varibale  
-   //        myFormData.append("data"+i, allTextLines[i]);
-   //      }
-   //        }
-         
-   //        for (let j = 0; j < arrl; j++) {
-           
-            
-             
-   //            tarrR.push(rows[j]);
-   //            tarrR = tarrR.filter(function(i){ return i != ""; });
-
-              
-              
-   //            // Begin assigning parameters
-             
-              
-              
-             
-           
-   //        }
-   //       //Push rows to array variable
-   //        this.linesR.push(tarrR);
-
-   //        //Sending post request with data to php file
-   //        return this.http.post('http://localhost/mypage.php/'
-   //              , myFormData).subscribe((res: Response) => {
-   //            console.log("User Registration has been done.");
-                
-                
-                  
-   //            });
-
-          
-   //    }
-   //  }
+  selectInput(event:any) {
+    let selected = event.target.value;
+    this.examenSelected = event.target.value;
+    console.log("La selection",this.examenSelected);
   }
-
   
+    
+  
+  constructor(private resultatService: ResultatService,private ngxCsvParser: NgxCsvParser) { }
+  @ViewChild('fileImportInput', { static: false }) fileImportInput: any;
+
+  // Your applications input change listener for the CSV File
+  fileChangeListener($event: any): void {
+    console.log("info sur csv 1");
+    // Select the files from the event
+    const files = $event.srcElement.files;
+
+    // Parse the file you want to select for the operation along with the configuration
+    this.ngxCsvParser.parse(files[0], { header: this.header, delimiter: ',' })
+      .pipe().subscribe({
+        next: (result): void => {
+          console.log("info sur csv 2");
+          console.log('Result', result);
+          console.log("info sur csv 3");
+          this.csvRecords = result;
+          console.log("fin de vie 3/2",result);
+          console.log("fin de vie 3/3",this.csvRecords);
+          this.csvRecords.forEach((line: any) =>{
+            console.log("huuuummm ligne===>",line); 
+              if(this.examenSelected == 'CEPD'){
+                this.resultatService.postAdminCEPDAPIURL(this.newFicheExamenCEPD).toPromise().then(line=>{
+                  console.log("les infos de ligne CEPD===>",line); 
+                },(error:HttpErrorResponse)=>{console.log(error.message);console.log("errrrreeeeeeuuuuuuuurrrrr CEPD----",line); })
+             
+              }
+              if(this.examenSelected == 'BEPC'){
+                this.resultatService.postAdminBEPCAPIURL(this.newFicheExamenBEPC).toPromise().then(line=>{
+                  console.log("les infos de ligne BEPC===>",line); 
+                },(error:HttpErrorResponse)=>{console.log(error.message);console.log("errrrreeeeeeuuuuuuuurrrrr BEPC----",line); })
+              }
+              if(this.examenSelected == 'BACI'){ 
+                this.resultatService.postAdminBACIAPIURL(this.newFicheExamenBACI).toPromise().then(line=>{
+                console.log("les infos de ligne BACI===>",line); 
+              },(error:HttpErrorResponse)=>{console.log(error.message);console.log("errrrreeeeeeuuuuuuuurrrrr BACI----",line); })
+            }
+              if(this.examenSelected == 'BACII'){}
+               
+             //this.addFicheExamenBEPC();
+            console.log("** *********");
+            
+          });
+        },
+        error: (error: NgxCSVParserError): void => {
+          console.log("info sur csv 4");
+          console.log('Error', error);
+        }
+      });
+    }
+
+
   ngOnInit(): void {
+    this.examens=[
+      new Examen(1,"CEPD"),
+      new Examen(2,"BEPC"),
+      new Examen(3,"BACI"),
+      new Examen(4,"BACII"),
+      new Examen(5,"CAP"),
+    ]
     
   }
 
-  CSVConstants = {
-    tokenDelimeter: ",",
-    isHeaderPresentFlag: true,
-    validateHeaderAndRecordLengthFlag: true,
-    valildateFileExtenstionFlag: true,
- }
- 
- public csvChanged(event:any) {
-     var files = event.target.files;
- 
-     if (this.CSVConstants.validateHeaderAndRecordLengthFlag) {
-       console.log("entrer dans 1");
-         if (!this.fileUtil.isCSVFile(files[0])) {
-             this.utilService.showToastMsg("error", "Veuillez importer un fichier valide");
-             this.fileReset();
-             console.log("entrer dans 2");
-             return;
-         }
-     }
- 
-     var input = event.target;
-     var reader = new FileReader();
-     reader.readAsText(input.files[0]);
- 
-     reader.onload = (data) => {
-         let csvData: any = reader.result;
-         let csvRecordsArray = csvData.split(/\r\n|\n/);
- 
-         var headerLength = -1;
-         if (this.CSVConstants.isHeaderPresentFlag) {
-             let headersRow = this.fileUtil.getHeaderArray(csvRecordsArray, this.CSVConstants.tokenDelimeter);
-             headerLength = headersRow.length;
-             console.log("entrer dans 3");
-         }
- 
-         this.csvRecords = this.fileUtil.getDataRecordsArrayFromCSVFile(csvRecordsArray,
-             headerLength, this.CSVConstants.validateHeaderAndRecordLengthFlag, this.CSVConstants.tokenDelimeter);
- 
-         if (this.csvRecords == null) {
-             //If control reached here it means csv file contains error, reset file.
-             console.log("4 ligne erreur detecté");
-             this.fileReset();
-         }
- 
-         /* Remove the file so that user can upload same one after making changes, otherwise change event
-             will not be called */
-         this.clearFile();
- 
-         /* Remove the first header row */
-         this.csvRecords.splice(0, 1);
- 
-         this.csvRecords.map((record: any) => {
-          console.log("entrer dans 5 le map faux de mail");
-             this.external_contacts_arr.push({
-                 email: record[0],
-                 first_name: record[1],
-                 last_name: record[2],
-                 designation: record[3],
-             })
-         });
-         this.removeBlankRecords();
-         //document.getElementById(`${this.uniquePrefix}-other-tab`).click();
-     }
- 
-     reader.onerror = () => {
-         this.utilService.showToastMsg("error", 'Unable to read ' + input.files[0]);
-         console.log("entrer dans 6");
-     };
- }
-  removeBlankRecords() {
-    throw new Error('Method not implemented.');
-    console.log("entrer dans 7");
-  }
-  clearFile() {
-    throw new Error('Method not implemented.');
-    console.log("entrer dans 8");
-  }
-  fileReset() {
-    throw new Error('Method not implemented.');
-    console.log("entrer dans 9");
-  }
+    /**
+ * Methode d'ajout de FicheExamenBEPC
+ */
+  addFicheExamenBEPC(){
+    this.resultatService.postAdminBEPCAPIURL(this.newFicheExamenBEPC).toPromise().then(data=>{
+      console.log("la ligne d'info ===>",data); 
+    },(error:HttpErrorResponse)=>{alert(error.message);})
+  };
+
 }

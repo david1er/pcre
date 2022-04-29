@@ -1,24 +1,42 @@
 <!-- fenetre modale pour modification -->
 
-<!-- Button trigger modal -->
-<!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-  Launch demo modal
-</button> -->
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- Modification Modal -->
+<div class="modal fade" id="modifConf" tabindex="-1" aria-labelledby="modifConfLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="modifConfLabel">Modification des dates de configuration d'examen</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        ...
+        <form #editForm="ngForm">
+          <div class="form-row row">
+            <div class="form-group col-md-8">
+              <input type="hidden" name="idConfig" class="form-control" id="idConfig" ngModel="{{editConfig?.idConfig}}">
+              <label class="col-form-label-lg" for="examen">Examen :</label>
+              <select name="examen" id="examen" class="field border border-2" autocomplete="off" ngModel="{{editConfig?.examen}}">Examen
+                  <option *ngFor="let examen of examens" [value]="examen.libelle_examen" >{{examen.libelle_examen}}</option>
+              </select>
+            </div>
+            <div class="form-group col-md-3">
+              <label class="col-form-label-lg" for="position">Position :</label>
+              <input type="number" class="field border border-2" id="position" ngModel="{{editConfig?.position}}" name="position"> 
+            </div>
+          </div>
+          <div class="row">
+              <label class="col-form-label-lg" for="date_debut">Date de début de publication :</label>
+              <input type="date" class="field border border-2" id="date_debut" ngModel="{{editConfig?.date_publicationDebut}}" name="date_publicationDebut"> 
+          </div>
+          <div class="row">
+              <label class="col-form-label-lg" for="date_fin">Date de fin de publication :</label>
+              <input type="date" class="field border border-2" id="date_fin" ngModel="{{editConfig?.date_publicationFin}}" name="date_publicationFin"> 
+          </div>
+      </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+        <button type="button" class="btn btn-primary" (click)="updateConfig(editForm.value)">Valider</button>
       </div>
     </div>
   </div>
@@ -31,9 +49,9 @@
       <app-sidebar></app-sidebar>
     </div>
     <div class="col-md-9 col-sm-10" style="margin-top:2%;">
-      <div class="container">
+      <div class="main-container">
   
-        <h1 class="mt-4">Configuration des dates de publication</h1>
+        <h1 class="mt-4">Configuration des dates de publication</h1> <button class="btn btn-success" routerLink="/admin/dateGenerale"> Date Générale</button>
           <div class="alert alert-success" role="alert" *ngIf="message">
             {{message}}
           </div>
@@ -42,23 +60,23 @@
                 <form role="config" method="POST" action="javascript:;">
                     <div class="form-row row">
                       <div class="form-group col-md-8">
-                        <label for="examen">Examen :</label>
-                        <select name="examen" id="examen" class="field" autocomplete="off" [(ngModel)]="newConfig.examen">Examen
+                        <label class="col-form-label-lg" for="examen">Examen :</label>
+                        <select name="examen" id="examen" class="field border border-2" autocomplete="off" [(ngModel)]="newConfig.examen">Examen
                             <option *ngFor="let examen of examens" [value]="examen.libelle_examen" >{{examen.libelle_examen}}</option>
                         </select>
                       </div>
                       <div class="form-group col-md-3">
-                        <label for="position">Position :</label>
-                        <input type="number" class="field" id="position" [(ngModel)]="newConfig.position" name="position"> 
+                        <label class="col-form-label-lg" for="position">Position :</label>
+                        <input type="number" class="field border border-2" id="position" [(ngModel)]="newConfig.position" name="position"> 
                       </div>
                     </div>
                     <div class="row">
-                        <label for="date_debut">Date de début de publication :</label>
-                        <input type="date" class="field" id="date_debut" [(ngModel)]="newConfig.date_publicationDebut" name="date_publicationDebut"> 
+                        <label class="col-form-label-lg" for="date_debut">Date de début de publication :</label>
+                        <input type="date" class="field border border-2" id="date_debut" [(ngModel)]="newConfig.date_publicationDebut" name="date_publicationDebut"> 
                     </div>
                     <div class="row">
-                        <label for="date_fin">Date de fin de publication :</label>
-                        <input type="date" class="field" id="date_fin" [(ngModel)]="newConfig.date_publicationFin" name="date_publicationFin"> 
+                        <label class="col-form-label-lg" for="date_fin">Date de fin de publication :</label>
+                        <input type="date" class="field border border-2" id="date_fin" [(ngModel)]="newConfig.date_publicationFin" name="date_publicationFin"> 
                     </div>
                     <div style="margin-top: 2%;">
                         <input type="submit" value="Valider" (click)="addConfig()" class="error-btn button">
@@ -85,7 +103,7 @@
                 <td>{{config.date_publicationDebut}}</td>                            
                 <td>{{config.date_publicationFin}}</td>                            
                 <td>{{config.etat}}</td>                            
-                <td><button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">Modifier</button></td>                            
+                <td><button type="button" (click)="openModal(config)" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modifConf">Modifier</button></td>                            
                 <td> <button (click)="deleteConfig(config)" class="btn btn-danger">Supprimer</button> </td>                            
               </tr>
             </tbody>

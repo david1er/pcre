@@ -8,22 +8,46 @@
       <h1 class="mt-4">Consultation des resultats</h1>
      
 
-      <nav class="navbar navbar-light bg-light">
+      <nav class="bg-light">
         <form class="form-inline" method="POST" action="javascript:;">
-          <input class="form-control mr-sm-2" type="number" placeholder="Année" aria-label="Année" id="annee" required>
-          <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" placeholder="Session" name="Session">
-            <option value="Normale">Normale</option>
-            <option value="Malade">Malade</option>
-          </select>
-          <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="examen" [(ngModel)]="examen" (change)="selectInput($event)" required>
-            <option *ngFor="let examen of examens" [value]="examen.libelle_examen" >{{examen.libelle_examen}}</option>
-          </select>
-          <select name="region" id="region" class="custom-select mr-sm-2" id="inlineFormCustomSelect"[(ngModel)]="region" *ngIf="examenSelected === 'CEPD'">Région
-            <option [value]="region.libelle_region" *ngFor="let region of regions">{{region.libelle_region}}</option>
-        </select>
-          <input class="form-control mr-sm-2" type="text" placeholder="N° table" aria-label="N° table" id="numTable" required>
-          <input class="form-control mr-sm-2" type="text" placeholder="Nom" id="nom_prenom">
-            <input type="submit" value="🔍" (click)="getResultAdmin()" class="error-btn button" name="rech">
+          <div class="row form-group mb-2">
+            <div class="col-lg-6">
+              <label class="col-form-label-lg" for="annee">Année :</label>
+              <input class="form-control border border-2" type="number" placeholder="Année" aria-label="Année" id="annee" required>
+            </div>
+            <div class="col-lg-6">
+              <label class="col-form-label-lg" for="session">Session :</label>
+              <select class="custom-select border border-2" id="inlineFormCustomSelect" placeholder="Session" name="Session">
+                <option value="Normale">Normale</option>
+                <option value="Malade">Malade</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group row mb-2">
+            <div class="col-lg-6">
+              <label class="col-form-label-lg" for="examen">Examen :</label>
+              <select class="custom-select border border-2" id="inlineFormCustomSelect" name="examen" [(ngModel)]="examen" (change)="selectInput($event)" required>
+                <option *ngFor="let examen of examens" [value]="examen.libelle_examen" >{{examen.libelle_examen}}</option>
+              </select>
+            </div>
+            <div class="col-lg-6" *ngIf="examenSelected === 'CEPD'">
+              <label class="col-form-label-lg" for="region">Région :</label>
+              <select name="region" id="region" class="custom-select border border-2" id="inlineFormCustomSelect" [(ngModel)]="region" >Région
+                <option [value]="region.libelle_region" *ngFor="let region of regions">{{region.libelle_region}}</option>
+            </select>
+            </div>
+          </div>
+          <div class="form-group row mb-2">
+            <div class="col-lg-6">
+              <label class="col-form-label-lg" for="num_table">N° de Table :</label>
+              <input class="form-control border border-2" type="number" name="num_table" [(ngModel)]="num_table" placeholder="N° table" aria-label="N° table" id="num_table" required>
+            </div>
+            <div class="col-lg-6">
+              <label class="col-form-label-lg" for="nom_prenom">Nom :</label>
+              <input class="form-control border border-2" type="text" placeholder="Nom" id="nom_prenom">
+            </div>
+          </div>
+            <input type="submit" type="reset" value="Rechercher 🔍" (click)="getResultAdmin()" class="error-btn button" name="rech">
         </form>
       </nav>
 
@@ -59,6 +83,9 @@
           </tr>
         </tbody>
       </table>
+      <div *ngIf="table_resultatExamen?.length==0"class="alert alert-primary text-center" role="alert">
+        Aucune information fournie !!!
+      </div>
     </div>
   </div>
   

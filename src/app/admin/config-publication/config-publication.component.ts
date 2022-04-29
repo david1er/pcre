@@ -3,6 +3,7 @@ import { Examen } from 'src/app/Model/Examen';
 import { Config } from 'src/app/Model/Config';
 import { ResultatService } from '../resultat.service';
 import { DatePipe } from '@angular/common';
+import { HttpErrorResponse } from '@angular/common/http';
 
 
 @Component({
@@ -24,6 +25,9 @@ export class ConfigPublicationComponent implements OnInit {
   idConfig:number=0;
   newConfig = new Config(this.idConfig,this.examen,this.position,this.date_publicationDebut,this.date_publicationFin,this.etat);
   
+  editConfig:Config | undefined;
+  ficheExamenList=[];
+
   myModal = document.getElementById('myModal')
   myInput = document.getElementById('myInput')
 
@@ -51,7 +55,7 @@ export class ConfigPublicationComponent implements OnInit {
   getCongifAll(){
     this.resultatService.getAPIData2().toPromise().then(data=>{
       this.table_config=data;
-  })
+  },(error:HttpErrorResponse)=>{alert(error.message);})
 };
 
 /**
@@ -60,9 +64,20 @@ export class ConfigPublicationComponent implements OnInit {
   addConfig(){
     this.resultatService.postAdminConfigAPIURL(this.newConfig).toPromise().then(config=>{
       this.message="Date de publication de "+this.newConfig.examen+" bien enrégistré";
-      console.log("les infos===>",config);
+      console.log("les infos===++++++++++++++++++++++++++++++++++++>",config);
       window.setTimeout(function(){location.reload()},2000)
-    })
+    },(error:HttpErrorResponse)=>{alert(error.message);})
+  };
+
+/**
+ * Methode de modification des config
+ */
+  updateConfig(config:Config){
+    console.log("les infos===>",config);
+    this.resultatService.updateAdminConfigAPIURL(config).toPromise().then(config=>{
+      this.message="Date de publication bien enrégistrée";
+      window.setTimeout(function(){location.reload()},2000)
+    },(error:HttpErrorResponse)=>{alert(error.message);})
   };
 
 /**
@@ -88,6 +103,18 @@ export class ConfigPublicationComponent implements OnInit {
       }
     })
 
+  }
+
+  openModal(config:Config){
+    const container = document.getElementById('main-container');
+    const button=document.createElement('button');
+    button.type='button';
+    button.style.display='none';
+    this.editConfig=config;
+    console.log("le editConffff====>",config);
+    button.setAttribute('data-toogle','modal'); 
+    container?.appendChild(button);
+    button.click();
   }
 }
 

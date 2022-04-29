@@ -1,0 +1,98 @@
+<!-- Modification Modal -->
+<div class="modal fade" id="modifDatePub" tabindex="-1" aria-labelledby="modifDatePubLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modifDatePubLabel">Modification de la Date Générale de Publication</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form #editForm="ngForm">
+          <div class="form-row row">
+            <input type="hidden" name="idDatePublicationGenerale" class="form-control" id="idDatePublicationGenerale" ngModel="{{editDatePublicationGenerale?.idDatePublicationGenerale}}">
+           
+          </div>
+          <div class="row">
+              <label class="col-form-label-lg" for="date_publicationGeneraleDebut">Date de début de publication :</label>
+              <input type="date" class="field border border-2" id="date_publicationGeneraleDebut" ngModel="{{editDatePublicationGenerale?.date_publicationGeneraleDebut}}" name="date_publicationGeneraleDebut"> 
+          </div>
+          <div class="row">
+              <label class="col-form-label-lg" for="date_publicationGeneraleFin">Date de fin de publication :</label>
+              <input type="date" class="field border border-2" id="date_publicationGeneraleFin" ngModel="{{editDatePublicationGenerale?.date_publicationGeneraleFin}}" name="date_publicationGeneraleFin"> 
+          </div>
+      </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+        <button type="button" class="btn btn-primary" (click)="updateDatePublicationGenerale(editForm.value)">Valider</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<div class="row">
+    <div class="col-md-3 col-sm-2" style="margin-top:2%;">
+      <app-sidebar></app-sidebar>
+    </div>
+    <div class="col-md-9 col-sm-10" style="margin-top:2%;">
+      <div class="container">
+  
+        <h1 class="mt-4">Configuration de la date Générale de publication</h1>
+          <div class="alert alert-success" role="alert" *ngIf="message">
+            {{message}}
+          </div>
+        <div class="" style="margin-top: 2%;">
+            <div>
+                <form role="config" method="POST" action="javascript:;">
+                    <div class="row">
+                        <div class="form-row row">
+                          <div class="form-group col-md-6">
+                            <label class="col-form-label-lg" for="date_debut">Date de début de publication :</label>
+                            <input type="date" class="field border border-2" id="date_debut" [(ngModel)]="newDatePubGenerale.date_publicationGeneraleDebut" name="date_publicationGeneraleDebut" required> 
+                      
+                          </div>
+                        
+                          <div class="form-group col-md-6">
+                            <label class="col-form-label-lg" for="date_fin">Date de fin de publication :</label>
+                            <input type="date" class="field border border-2" id="date_fin" [(ngModel)]="newDatePubGenerale.date_publicationGeneraleFin" name="date_publicationGeneraleDebut" required> 
+                          </div>
+                        </div>
+                      </div>
+                      
+                    <div style="margin-top: 2%;" *ngIf="show">
+                        <input type="submit" value="Valider" (click)="addDatePublicationGenerale()" class="error-btn button">
+                    </div>
+                </form>
+                
+            </div>
+        </div>
+        <table class="table table-bordered table-dark mt-5">
+            <thead>
+              <tr>
+                
+                <th>Debut</th>
+                <th>Fin</th>
+                
+                <th colspan="2">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let config of table_datePub">
+                <td>{{config.date_publicationGeneraleDebut}}</td>                            
+                <td>{{config.date_publicationGeneraleFin}}</td>                                                      
+                <td><button type="button"(click)="openModal(config)" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modifDatePub">Modifier</button></td>                            
+                <td> <button (click)="deleteDatePublicationGenerale(config)" class="btn btn-danger">Supprimer</button> </td>                            
+              </tr>
+            </tbody>
+        </table>
+        
+      </div>
+    </div>
+    
+    
+  </div>
+
+  

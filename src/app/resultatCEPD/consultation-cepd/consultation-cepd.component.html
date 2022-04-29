@@ -1,0 +1,93 @@
+<header class="page-header">
+    <div class="container clr page-header-inner">
+        <h1 class="page-header-title clr" itemprop="headline">Resultat d'examen</h1>
+        <nav aria-label="Fil d’Ariane" class="site-breadcrumbs clr position-" itemprop="breadcrumb">
+            <ol class="trail-items" itemscope="" itemtype="http://schema.org/BreadcrumbList">
+                <meta name="numberOfItems" content="2">
+                <meta name="itemListOrder" content="Ascending">
+                <li class="trail-item trail-begin" itemprop="itemListElement" itemscope=""
+                    itemtype="https://schema.org/ListItem"><a href="https://education.gouv.tg/" rel="home"
+                        aria-label="Accueil" itemtype="https://schema.org/Thing" itemprop="item"><span
+                            itemprop="name"><span class="icon-home" aria-hidden="true"></span><span
+                                class="breadcrumb-home has-icon">Accueil</span></span></a><span
+                        class="breadcrumb-sep">&gt;</span>
+                    <meta content="1" itemprop="position">
+                </li>
+                <li class="trail-item trail-end" itemprop="itemListElement" itemscope=""
+                    itemtype="https://schema.org/ListItem"><a span="" itemprop="item" href="#"><span
+                            itemprop="name"><span class="breadcrumb-error">404 Non trouvé</span></span></a>
+                    <meta content="2" itemprop="position">
+                </li>
+            </ol>
+        </nav>
+    </div><!-- .page-header-inner -->
+</header><!-- .page-header -->
+
+
+
+<div id="content-wrap" class="container clr">
+
+    <div id="primary" class="content-area clr">
+
+        <div id="content" class="clr site-content">
+            <article class="entry clr">
+                <div class="error404-content clr">
+                    <div class="elementor-widget-container">
+                        <h2 class="elementor-heading-title elementor-size-default">Rechercher vos résultats du CEPD </h2>
+                    </div>
+                        <div class="row" style="margin-top: 3%;">
+                            <div>
+                                <form role="search" method="POST" class="searchform" action="javascript:;">
+                                    <div class="row">
+                                        <label class="col-form-label-lg" for="region">Choisir votre Région :</label>
+                                        <select name="region" id="region" class="field border border-2" autocomplete="off" [(ngModel)]="zone">Région
+                                            <option [value]="region.libelle_region" *ngFor="let region of regions">{{region.libelle_region}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="row">
+                                        <label class="col-form-label-lg" for="numTable">Entrez votre N° de table :</label>
+                                        <input type="search" max=99999 id="numTable" class="form-control border border-2" autocomplete="off"
+                                            placeholder="Saisissez votre numéro de table" [(ngModel)]="numTable" name="recherche">
+                                        <input TYPE="submit" type="reset" VALUE="Rechercher" (click)="getResultCEPD()" class="error-btn button">
+                                    </div>
+                                </form>
+                                <div style="margin-top: 5%;">
+                                    <!-- <app-affichage-resultat></app-affichage-resultat> -->
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngFor="let result of table_resultatExamen">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>N° Table</th>
+                                            <th>Nom & Prénoms</th>
+                                            <th>Centre d'écrit</th>
+                                            <th>Décision</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr style="font-size: 2em;">
+                                            <td style="color: #0F97D0;" >{{result.num_table}}</td>
+                                            <td>{{result.nom_prenom}}</td>
+                                            <td>{{result.centre_decrit}}</td>
+                                            <td *ngIf="result.decision=='Ajourné(e)'" style="color: red;" >{{result.decision}}</td>
+                                            <td *ngIf="result.decision=='Admis(e)'" style="color: green;" >{{result.decision}}</td>
+                                            <td *ngIf="!(result.decision=='Admis(e)' || result.decision=='Ajourné(e)')">{{result.decision}}</td>
+                                        </tr>
+
+                                    </tbody>
+
+                                </table>    
+                            </div>
+                            <div *ngIf="table_resultatExamen?.length==0" class="alert alert-primary text-center col-form-label-lg" role="alert">
+                                Aucune information fournie !!!
+                            </div>
+
+                    <a class="error-btn button" href="https://education.gouv.tg/">Revenir à l’accueil</a>
+                </div><!-- .error404-content -->
+            </article><!-- .entry -->
+
+        </div><!-- #content -->
+    </div><!-- #primary -->
+</div><!-- #content-wrap -->

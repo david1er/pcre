@@ -3,6 +3,8 @@ import { Examen } from '../Model/Examen';
 import { Region } from '../Model/Region';
 import { ResultatService } from '../admin/resultat.service';
 import { ResultatExamen } from '../Model/Resultat';
+import { DatePublicationGenerale } from '../Model/DatePublicationGenerale';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-resultat',
@@ -17,7 +19,17 @@ export class ResultatComponent implements OnInit {
   examenSelected = 'CEPD';
   table_resultatExamen: ResultatExamen[]=[];
   numTable: number=0;
+  type_enseignement: string="";
   zone: string="";
+
+  date1: Date = new Date('03.30.2022');
+  date2: Date = new Date('10.31.2022');
+  currentDate: Date = new Date();
+  show: boolean = false;
+  
+
+  table_datePub: DatePublicationGenerale[]=[];
+  aujourdhui = moment().format('L');
   @Output() selectionChange= new EventEmitter;
 
   isNameSelected: boolean | undefined;
@@ -50,6 +62,51 @@ export class ResultatComponent implements OnInit {
     ]
     console.log('les regions=>',this.regions);
     console.log('les examens=>',this.examens);
+    console.log('la dateeeeeee =>',this.currentDate);
+    this.getDatePublicationGeneraleAll();
+    this.calculDatePublication();
+    this.aujourdhui;
+    this.compareDates();
+  }
+
+  /**
+   * Methode d'affichage des DatePublicationGenerale
+  */
+    getDatePublicationGeneraleAll(){
+      let startDate =new Date(this.aujourdhui);
+      let endDate = new Date("2022-05-10");
+      this.resultatService.getAPIDataPub().toPromise().then(data=>{
+        console.log("dataaaaa==============",data);
+        this.table_datePub=data;
+        this.table_datePub.forEach((line) => { 
+          if(new Date(line.date_publicationGeneraleDebut).getTime()<=startDate.getTime() && startDate.getTime()<=new Date(line.date_publicationGeneraleFin).getTime() ){
+            console.log("lineDebut---------------",new Date(line.date_publicationGeneraleDebut).getTime()); 
+            console.log("lineFin---------------",new Date(line.date_publicationGeneraleFin).getTime());
+            this.show = !this.show; 
+          }else{
+            console.log("la date startdate",startDate.getTime());
+            console.log("la date string startdate",startDate);
+            this.show = this.show; 
+          }
+          
+          
+          
+        });
+    })
+  };
+
+  compareDates(){
+    if(this.date1.getTime()<=this.currentDate.getTime() && this.currentDate.getTime()<= this.date2.getTime() ){
+      console.log("date1 < current date< date2",this.currentDate.getTime())
+    }
+    if(this.date1.getTime()>this.currentDate.getTime()){
+      console.log("date1 > current date")
+    }
+  }
+  
+  calculDatePublication(){
+    
+
   }
  
   
@@ -64,21 +121,38 @@ export class ResultatComponent implements OnInit {
       console.log('ACTIVONS');
     } */
   }
+
   getResult(){
     if (this.zone!=""){
       this.resultatService.getResultAPIUrl(this.numTable,this.zone).toPromise().then(data=>{
-        console.log('recherche',data);
+        console.log('recherche CEPD',data);
+        console.log('zooonnne===>',this.zone);
         
         this.table_resultatExamen=data;
       })
-    } else if(this.examenSelected=="BEPC"){
+    };
+    if(this.examenSelected=="BEPC"){
       console.log("BEEEEPPPPCCCCCC");
       this.resultatService.getResultBEPCAPIUrl(this.numTable).toPromise().then(data=>{
-        console.log('recherche',data);
+        console.log('recherche BEPC==>',data);
+        console.log('recherche BEPC resulttt==>', this.resultatService.getResultBEPCAPIUrl(this.numTable));
+        this.table_resultatExamen=data;
+      })
+    }if(this.examenSelected=="BACI"){
+      console.log("BACI");
+      this.resultatService.getResultBACIAPIUrl(this.numTable,this.type_enseignement).toPromise().then(data=>{
+        console.log('recherche BACI',data);
         
         this.table_resultatExamen=data;
       })
-    } else{
+    } if(this.examenSelected=="BACII"){
+      console.log("BACII");
+      this.resultatService.getResultBACIIAPIUrl(this.numTable).toPromise().then(data=>{
+        console.log('recherche BACI',data);
+        
+        this.table_resultatExamen=data;
+      })
+    }else{
       this.table_resultatExamen=[];
     }
     
