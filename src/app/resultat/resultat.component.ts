@@ -18,6 +18,7 @@ export class ResultatComponent implements OnInit {
   examens!:Examen[];
   examenSelected = 'CEPD';
   table_resultatExamen: ResultatExamen[]=[];
+  modeResultat: any =0;
   numTable: number=0;
   type_enseignement: string="";
   zone: string="";
@@ -75,8 +76,9 @@ export class ResultatComponent implements OnInit {
     getDatePublicationGeneraleAll(){
       let startDate =new Date(this.aujourdhui);
       let endDate = new Date("2022-05-10");
+      console.log("dataaaaa=====**************=========");
       this.resultatService.getAPIDataPub().toPromise().then(data=>{
-        console.log("dataaaaa==============",data);
+        console.log("da2=====**************=========",data);
         this.table_datePub=data;
         this.table_datePub.forEach((line) => { 
           if(new Date(line.date_publicationGeneraleDebut).getTime()<=startDate.getTime() && startDate.getTime()<=new Date(line.date_publicationGeneraleFin).getTime() ){
@@ -129,6 +131,7 @@ export class ResultatComponent implements OnInit {
         console.log('zooonnne===>',this.zone);
         
         this.table_resultatExamen=data;
+        this.modeResultat=1;
       })
     };
     if(this.examenSelected=="BEPC"){
@@ -137,6 +140,7 @@ export class ResultatComponent implements OnInit {
         console.log('recherche BEPC==>',data);
         console.log('recherche BEPC resulttt==>', this.resultatService.getResultBEPCAPIUrl(this.numTable));
         this.table_resultatExamen=data;
+        this.modeResultat=1;
       })
     }if(this.examenSelected=="BACI"){
       console.log("BACI");
@@ -144,6 +148,7 @@ export class ResultatComponent implements OnInit {
         console.log('recherche BACI',data);
         
         this.table_resultatExamen=data;
+        this.modeResultat=1;
       })
     } if(this.examenSelected=="BACII"){
       console.log("BACII");
@@ -151,9 +156,11 @@ export class ResultatComponent implements OnInit {
         console.log('recherche BACI',data);
         
         this.table_resultatExamen=data;
+        this.modeResultat=1;
       })
     }else{
       this.table_resultatExamen=[];
+      this.modeResultat=1;
     }
     
   } 

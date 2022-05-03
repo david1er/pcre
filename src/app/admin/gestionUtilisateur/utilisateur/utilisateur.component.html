@@ -1,0 +1,128 @@
+<!-- fenetre modale pour modification -->
+
+
+<!-- Modification Modal -->
+<div class="modal fade" id="modifAppUser" tabindex="-1" aria-labelledby="modifAppUserLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modifAppUserLabel">Modification des dates de configuration d'examen</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form #editForm="ngForm">
+            <!-- <div class="form-row row">
+              <div class="form-group col-md-8">
+                <input type="hidden" name="id" class="form-control" id="id" ngModel="{{editAppUser?.id}}">
+                <label class="col-form-label-lg" for="examen">Examen :</label>
+                <select name="examen" id="examen" class="field border border-2" autocomplete="off" ngModel="{{editAppUser?.examen}}">Examen
+                    <option *ngFor="let examen of examens" [value]="examen.libelle_examen" >{{examen.libelle_examen}}</option>
+                </select>
+              </div>
+              <div class="form-group col-md-3">
+                <label class="col-form-label-lg" for="position">Position :</label>
+                <input type="number" class="field border border-2" id="position" ngModel="{{editConfig?.position}}" name="position"> 
+              </div>
+            </div>
+            <div class="row">
+                <label class="col-form-label-lg" for="date_debut">Date de début de publication :</label>
+                <input type="date" class="field border border-2" id="date_debut" ngModel="{{editConfig?.date_publicationDebut}}" name="date_publicationDebut"> 
+            </div>
+            <div class="row">
+                <label class="col-form-label-lg" for="date_fin">Date de fin de publication :</label>
+                <input type="date" class="field border border-2" id="date_fin" ngModel="{{editConfig?.date_publicationFin}}" name="date_publicationFin"> 
+            </div> -->
+        </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+          <button type="button" class="btn btn-primary" (click)="updateAppUser(editForm.value)">Valider</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+  
+  <div class="row">
+      <div class="col-md-3 col-sm-2" style="margin-top:2%;">
+        <app-sidebar></app-sidebar>
+      </div>
+      <div class="col-md-9 col-sm-10" style="margin-top:2%;">
+        <div class="main-container">
+    
+          <h1 class="mt-4">Ajouter un nouvel utilisateur</h1> 
+            <button type="button" class="btn btn-success" routerLink="/admin/gestion-role"> Gestion de rôle</button>&nbsp;
+            <button type="button" class="btn btn-warning ml-2" routerLink="/admin/gestion-role"> Gestion de droits</button>
+            <div class="alert alert-success" role="alert" *ngIf="message">
+              {{message}}
+            </div>
+          <div class="" style="margin-top: 2%;">
+              <div>
+                  <form role="user" method="POST" action="javascript:;">
+                      <div class="form-row row">
+                        <div class="row">
+                            <label class="col-form-label-lg" for="username">Nom utilisateur :</label>
+                            <input type="text" class="field border border-2" id="username" [(ngModel)]="newAppUser.username" name="username"> 
+                        </div>
+                        <div class="row">
+                            <label class="col-form-label-lg" for="password">Mot de passe :</label>
+                            <input type="password" class="field border border-2" id="username" [(ngModel)]="newAppUser.password" name="password"> 
+                        </div>
+                        <div class="row">
+                            <label class="col-form-label-lg" for="password">Confirmez le mot de passe :</label>
+                            <input type="password" class="field border border-2" id="username" [(ngModel)]="newAppUser.password" name="confirmedPassword"> 
+                        </div>
+                        <div class="row">
+                          <label class="col-form-label-lg" for="examen">Rôle :</label>
+                          <select name="role" id="role" class="field border border-2" autocomplete="off" [(ngModel)]="newAppUser.role">
+                              <!-- <option *ngFor="let examen of examens" [value]="examen.libelle_examen" >{{examen.libelle_examen}}</option> -->
+                          </select>
+                        </div>
+                      </div>
+                      <div class="form-group mt-4">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="gridCheck" name="actived" [(ngModel)]="newAppUser.actived">
+                          <label class="form-check-label col-form-label-lg" for="gridCheck">
+                            Activer
+                          </label>
+                        </div>
+                      </div>
+                      
+                      <div style="margin-top: 2%;">
+                          <input type="submit" value="Valider" (click)="addAppUser()" class="error-btn button">
+                      </div>
+                  </form>
+                  
+              </div>
+          </div>
+          <table class="table table-bordered table-dark mt-5">
+              <thead>
+                <tr>
+                  <th>Nom</th>
+                  <th>Nom d'utilisateur</th>
+                  <th>Psss</th>
+                  <th>Role</th>
+                  <th>Actif</th>
+                  <th colspan="2">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                  <tr *ngFor="let user of table_appUser">
+                  <td>{{user.username}</td>
+                  <td>{{user.password}}</td>                            
+                  <td>{{user.role}}</td>                            
+                  <td>{{user.actived}}</td>                            
+                  <td><button type="button"  class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modifAppUser">Modifier</button></td>                            
+                  <td> <button  class="btn btn-danger">Supprimer</button> </td>                            
+                </tr>
+              </tbody>
+          </table>
+          
+        </div>
+      </div>
+      
+      
+    </div>
+  
+    

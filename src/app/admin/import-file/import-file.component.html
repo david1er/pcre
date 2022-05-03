@@ -44,6 +44,9 @@
           </select>
           <input type="file" #fileImportInput name="File Upload" id="csvFileUpload" (change)="fileChangeListener($event)"
     accept=".csv" />
+    <small id="exigenceFichier" class="form-text text-muted col-form-label-lg">
+      Votre fichier doit être délimité par une virgule(,)
+    </small>
         </div>
     </div>
   

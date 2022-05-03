@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DatePublicationGenerale } from 'src/app/Model/DatePublicationGenerale';
 import { ResultatService } from '../resultat.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { ServiceAdminDatePubGeneraleService } from './services/service-admin-date-pub-generale.service';
 
 @Component({
   selector: 'app-date-publication-generale',
@@ -24,7 +25,9 @@ export class DatePublicationGeneraleComponent implements OnInit {
   
   editDatePublicationGenerale : DatePublicationGenerale|undefined;
 
-  constructor(private resultatService : ResultatService) { }
+  constructor(
+    private resultatService : ResultatService,
+    private serviceAdminDatePubGeneraleService: ServiceAdminDatePubGeneraleService) { }
 
   ngOnInit(): void {
     this.getDatePublicationGeneraleAll();
@@ -35,7 +38,7 @@ export class DatePublicationGeneraleComponent implements OnInit {
    * Methode d'affichage des DatePublicationGenerale
   */
    getDatePublicationGeneraleAll(){
-    this.resultatService.getAPIDataPub().toPromise().then(data=>{
+    this.serviceAdminDatePubGeneraleService.getAPIDataPub().toPromise().then(data=>{
       console.log("dataaaaa==============",data);
       this.table_datePub=data;
       this.table_datePub.forEach((line) => { 
@@ -56,7 +59,7 @@ export class DatePublicationGeneraleComponent implements OnInit {
  * Methode d'ajout des DatePublicationGenerale
  */
   addDatePublicationGenerale(){
-    this.resultatService.postAdminDatePublicationGeneraleAPIURL(this.newDatePubGenerale).toPromise().then(data=>{
+    this.serviceAdminDatePubGeneraleService.postAdminDatePublicationGeneraleAPIURL(this.newDatePubGenerale).toPromise().then(data=>{
       this.message="Date de publication de "+this.newDatePubGenerale.idDatePublicationGenerale+" bien enrégistré";
       console.log("les infos===>",data);
       window.setTimeout(function(){location.reload()},2000)
@@ -67,7 +70,7 @@ export class DatePublicationGeneraleComponent implements OnInit {
  */
  updateDatePublicationGenerale(datePub:DatePublicationGenerale){
   console.log("les infos===>",datePub);
-  this.resultatService.updateAdminDatePublicationGeneraleAPIURL(datePub).toPromise().then(datePub=>{
+  this.serviceAdminDatePubGeneraleService.updateAdminDatePublicationGeneraleAPIURL(datePub).toPromise().then(datePub=>{
     this.message="Date de publication bien enrégistrée";
     window.setTimeout(function(){location.reload()},2000)
   },(error:HttpErrorResponse)=>{alert(error.message);})
@@ -79,7 +82,7 @@ export class DatePublicationGeneraleComponent implements OnInit {
   deleteDatePublicationGenerale(datePub:DatePublicationGenerale){
     let conf = confirm("Voulez-vous réelement supprimer cette information?");
     if (conf){
-    this.resultatService.deleteAdminDatePublicationGeneraleAPIURL(datePub.idDatePublicationGenerale).toPromise().then(()=>{
+    this.serviceAdminDatePubGeneraleService.deleteAdminDatePublicationGeneraleAPIURL(datePub.idDatePublicationGenerale).toPromise().then(()=>{
       this.message="Information supprimé avec succès";
       console.log("supprimer ooooh===>");
       this.deleteDatePublicationGeneraleOfTable(datePub);

@@ -23,7 +23,7 @@ export class ImportFileComponent implements OnInit {
   id_fiche_examen: number=0;
   annee: number=0;
   centre_decrit: string="";
-  date_naissance: Date=new Date();
+  date_naissance: string="";
   decision: string="";
   ets_provenance: string="";
   examen: string="";
@@ -65,7 +65,7 @@ export class ImportFileComponent implements OnInit {
     // Parse the file you want to select for the operation along with the configuration
     this.ngxCsvParser.parse(files[0], { header: this.header, delimiter: ',' })
       .pipe().subscribe({
-        next: (result): void => {
+        next: (result: any): void => {
           console.log("info sur csv 2");
           console.log('Result', result);
           console.log("info sur csv 3");

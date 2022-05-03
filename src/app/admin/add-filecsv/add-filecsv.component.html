@@ -55,20 +55,20 @@
         <thead>
           <tr>
             <!-- <th *ngFor="let item of lines[0]; let i = index">Année</th> -->
-            <th>ANNEE</th>
-            <th>EXAMEN</th>
-            <th>REGION</th>
-            <th>JURY</th>
-            <th>N° TABLE</th>
-            <th>NOM & PRENOM</th>
-            <th>DECISION</th>
-            <th>SESSION</th>
-            <th>MENTION</th>
-            <th>SEXE</th>
+            <th scope="col">ANNEE</th>
+            <th scope="col">EXAMEN</th>
+            <th scope="col">REGION</th>
+            <th scope="col">JURY</th>
+            <th scope="col">N° TABLE</th>
+            <th scope="col">NOM & PRENOM</th>
+            <th scope="col">DECISION</th>
+            <th scope="col">SESSION</th>
+            <th scope="col">MENTION</th>
+            <th scope="col">SEXE</th>
           </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let resultat of table_resultatExamen">
+            <tr scope="row" *ngFor="let resultat of table_resultatExamen">
             <td>{{resultat.annee}}</td>
             <td>{{resultat.examen}}</td>
             <td>{{resultat.region}}</td>

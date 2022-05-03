@@ -5,7 +5,7 @@ export class FicheExamenBEPC{
     id_fiche_examen: number;
     annee: number;
     centre_decrit: string;
-    date_naissance: Date;
+    date_naissance: string;
     decision: string;
     ets_provenance: string;
     examen: string;
@@ -24,7 +24,7 @@ export class FicheExamenBEPC{
     constructor(id_fiche_examen: number,
     annee: number,
     centre_decrit: string,
-    date_naissance: Date,
+    date_naissance: string,
     decision: string,
     ets_provenance: string,
     examen: string,

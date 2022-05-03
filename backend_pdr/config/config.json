@@ -1,6 +1,0 @@
-{
-    "PG_HOST":"localhost",
-    "PG_USER": "pcruser",
-    "PG_DATABASE":"pcrbd",
-    "PG_PASSWORD":"postgres"
-}

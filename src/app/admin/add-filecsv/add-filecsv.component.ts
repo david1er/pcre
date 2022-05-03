@@ -4,6 +4,10 @@ import { ResultatExamen } from '../../Model/Resultat'
 import { ResultatService } from '../resultat.service';
 import { Region } from 'src/app/Model/Region';
 import { Examen } from 'src/app/Model/Examen';
+import { ServiceAdminResultatCEPDService } from './services/service-admin-resultat-cepd.service';
+import { ServiceAdminResultatBEPCService } from './services/service-admin-resultat-bepc.service';
+import { ServiceAdminResultatBACIService } from './services/service-admin-resultat-baci.service';
+import { ServiceAdminResultatBACIIService } from './services/service-admin-resultat-bacii.service';
 
 export interface GoogleVolumeListResponse {
   totalItems: number;
@@ -43,7 +47,13 @@ export class AddFilecsvComponent implements OnInit {
     console.log("La selection",this.examenSelected);
   }
   //private resultatExamenListUrl = 'http://localhost:3001/api/region/get-region';
-  constructor(private resultatService : ResultatService) { 
+  constructor(
+    private resultatService : ResultatService,
+    private resultatAdminCEPDService:ServiceAdminResultatCEPDService,
+    private resultatAdminBEPCService:ServiceAdminResultatBEPCService,
+    private resultatAdminBACIService:ServiceAdminResultatBACIService,
+    private resultatAdminBACIIService:ServiceAdminResultatBACIIService,
+    ) { 
     
   }
   
@@ -98,21 +108,21 @@ getResultAdmin(){
       console.log("dans CEPD1 le numtable==>",this.num_table);
       console.log("dans CEPD1 le annee==>",this.annee);
       console.log("dans CEPD1 le nom_prenom==>",this.nom_prenom);
-      this.resultatService.getResultAdminCEPD1APIUrl(this.annee,this.examen,this.num_table).toPromise().then(data=>{
+      this.resultatAdminCEPDService.getResultAdminCEPD1APIUrl(this.annee,this.examen,this.num_table).toPromise().then(data=>{
         console.log('recherche CEPD1 U===>',data);
       
         this.table_resultatExamen=data;
       },(error:HttpErrorResponse)=>{alert(error.message);})
     }
     else if(this.annee!=0 && this.nom_prenom!=""){
-      this.resultatService.getResultAdminCEPD3APIUrl(this.annee,this.nom_prenom).toPromise().then(data=>{
+      this.resultatAdminCEPDService.getResultAdminCEPD3APIUrl(this.annee,this.nom_prenom).toPromise().then(data=>{
         console.log('recherche CEPD3 T===>',data);
         
         this.table_resultatExamen=data;
       },(error:HttpErrorResponse)=>{alert(error.message);})
     }
     else if(this.examen != "" && this.annee != 0 && this.nom_prenom != ""){
-      this.resultatService.getResultAdminCEPD4APIUrl(this.annee,this.examen,this.nom_prenom).toPromise().then(data=>{
+      this.resultatAdminCEPDService.getResultAdminCEPD4APIUrl(this.annee,this.examen,this.nom_prenom).toPromise().then(data=>{
         console.log('recherche CEPD4 Q===>',data);
         
         this.table_resultatExamen=data;
@@ -120,7 +130,7 @@ getResultAdmin(){
   
     }
     else if(this.examen!="" && this.annee!=0 && this.region==" "){
-      this.resultatService.getResultAdminCEPD5APIUrl(this.annee,this.examen).toPromise().then(data=>{
+      this.resultatAdminCEPDService.getResultAdminCEPD5APIUrl(this.annee,this.examen).toPromise().then(data=>{
         console.log('recherche CEPD5 C===>',data);
         
         this.table_resultatExamen=data;
@@ -130,7 +140,7 @@ getResultAdmin(){
       console.log("dans CEPD1 le numtable==>",this.num_table);
       console.log("dans CEPD1 le annee==>",this.annee);
       console.log("dans CEPD1 le region==>",this.region);
-      this.resultatService.getResultAdminCEPD6APIUrl(this.annee,this.examen,this.region,this.num_table).toPromise().then(data=>{
+      this.resultatAdminCEPDService.getResultAdminCEPD6APIUrl(this.annee,this.examen,this.region,this.num_table).toPromise().then(data=>{
         console.log('recherche CEPD6 S===>',data);
       
         this.table_resultatExamen=data;
@@ -145,21 +155,21 @@ getResultAdmin(){
       console.log("dans BEPC1 le numtable==>",this.num_table);
       console.log("dans BEPC1 le annee==>",this.annee);
       console.log("dans BEPC1 le nom_prenom==>",this.nom_prenom);
-      this.resultatService.getResultAdminBEPC1APIUrl(this.annee,this.examen,this.num_table).toPromise().then(data=>{
+      this.resultatAdminBEPCService.getResultAdminBEPC1APIUrl(this.annee,this.examen,this.num_table).toPromise().then(data=>{
         console.log('recherche BEPC1 U===>',data);
       
         this.table_resultatExamen=data;
       },(error:HttpErrorResponse)=>{alert(error.message);})
     }
     else if(this.annee!=0 && this.nom_prenom!=""){
-      this.resultatService.getResultAdminBEPC3APIUrl(this.annee,this.nom_prenom).toPromise().then(data=>{
+      this.resultatAdminBEPCService.getResultAdminBEPC3APIUrl(this.annee,this.nom_prenom).toPromise().then(data=>{
         console.log('recherche BEPC3 T===>',data);
         
         this.table_resultatExamen=data;
       },(error:HttpErrorResponse)=>{alert(error.message);})
     }
     else if(this.examen != "" && this.annee != 0 && this.nom_prenom != ""){
-      this.resultatService.getResultAdminBEPC4APIUrl(this.annee,this.examen,this.nom_prenom).toPromise().then(data=>{
+      this.resultatAdminBEPCService.getResultAdminBEPC4APIUrl(this.annee,this.examen,this.nom_prenom).toPromise().then(data=>{
         console.log('recherche BEPC4 Q===>',data);
         
         this.table_resultatExamen=data;
@@ -167,7 +177,7 @@ getResultAdmin(){
   
     }
     else if(this.examen!="" && this.annee!=0 && this.region==" "){
-      this.resultatService.getResultAdminBEPC5APIUrl(this.annee,this.examen).toPromise().then(data=>{
+      this.resultatAdminBEPCService.getResultAdminBEPC5APIUrl(this.annee,this.examen).toPromise().then(data=>{
         console.log('recherche BEPC5 C===>',data);
         
         this.table_resultatExamen=data;
@@ -184,21 +194,21 @@ getResultAdmin(){
       console.log("dans BACI1 le numtable==>",this.num_table);
       console.log("dans BACI1 le annee==>",this.annee);
       console.log("dans BACI1 le nom_prenom==>",this.nom_prenom);
-      this.resultatService.getResultAdminBACI1APIUrl(this.annee,this.examen,this.num_table).toPromise().then(data=>{
+      this.resultatAdminBACIService.getResultAdminBACI1APIUrl(this.annee,this.examen,this.num_table).toPromise().then(data=>{
         console.log('recherche BACII1 U===>',data);
       
         this.table_resultatExamen=data;
       },(error:HttpErrorResponse)=>{alert(error.message);})
     }
     else if(this.annee!=0 && this.nom_prenom!=""){
-      this.resultatService.getResultAdminBACI3APIUrl(this.annee,this.nom_prenom).toPromise().then(data=>{
+      this.resultatAdminBACIService.getResultAdminBACI3APIUrl(this.annee,this.nom_prenom).toPromise().then(data=>{
         console.log('recherche BACI3 T===>',data);
         
         this.table_resultatExamen=data;
       },(error:HttpErrorResponse)=>{alert(error.message);})
     }
     else if(this.examen != "" && this.annee != 0 && this.nom_prenom != ""){
-      this.resultatService.getResultAdminBACI4APIUrl(this.annee,this.examen,this.nom_prenom).toPromise().then(data=>{
+      this.resultatAdminBACIService.getResultAdminBACI4APIUrl(this.annee,this.examen,this.nom_prenom).toPromise().then(data=>{
         console.log('recherche BACI4 Q===>',data);
         
         this.table_resultatExamen=data;
@@ -206,7 +216,7 @@ getResultAdmin(){
   
     }
     else if(this.examen!="" && this.annee!=0 && this.region==" "){
-      this.resultatService.getResultAdminBACI5APIUrl(this.annee,this.examen).toPromise().then(data=>{
+      this.resultatAdminBACIService.getResultAdminBACI5APIUrl(this.annee,this.examen).toPromise().then(data=>{
         console.log('recherche BACI5 C===>',data);
         
         this.table_resultatExamen=data;
@@ -222,21 +232,21 @@ getResultAdmin(){
       console.log("dans BACII1 le numtable==>",this.num_table);
       console.log("dans BACII1 le annee==>",this.annee);
       console.log("dans BACII1 le nom_prenom==>",this.nom_prenom);
-      this.resultatService.getResultAdminBACII1APIUrl(this.annee,this.examen,this.num_table).toPromise().then(data=>{
+      this.resultatAdminBACIIService.getResultAdminBACII1APIUrl(this.annee,this.examen,this.num_table).toPromise().then(data=>{
         console.log('recherche BACII1 U===>',data);
       
         this.table_resultatExamen=data;
       },(error:HttpErrorResponse)=>{alert(error.message);})
     }
     else if(this.annee!=0 && this.nom_prenom!=""){
-      this.resultatService.getResultAdminBACII3APIUrl(this.annee,this.nom_prenom).toPromise().then(data=>{
+      this.resultatAdminBACIIService.getResultAdminBACII3APIUrl(this.annee,this.nom_prenom).toPromise().then(data=>{
         console.log('recherche BACII3 T===>',data);
         
         this.table_resultatExamen=data;
       },(error:HttpErrorResponse)=>{alert(error.message);})
     }
     else if(this.examen != "" && this.annee != 0 && this.nom_prenom != ""){
-      this.resultatService.getResultAdminBACII4APIUrl(this.annee,this.examen,this.nom_prenom).toPromise().then(data=>{
+      this.resultatAdminBACIIService.getResultAdminBACII4APIUrl(this.annee,this.examen,this.nom_prenom).toPromise().then(data=>{
         console.log('recherche BACII4 Q===>',data);
         
         this.table_resultatExamen=data;
@@ -244,7 +254,7 @@ getResultAdmin(){
   
     }
     else if(this.examen!="" && this.annee!=0 && this.region==" "){
-      this.resultatService.getResultAdminBACII5APIUrl(this.annee,this.examen).toPromise().then(data=>{
+      this.resultatAdminBACIIService.getResultAdminBACII5APIUrl(this.annee,this.examen).toPromise().then(data=>{
         console.log('recherche BACII5 C===>',data);
         
         this.table_resultatExamen=data;

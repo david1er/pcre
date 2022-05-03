@@ -24,7 +24,7 @@ import { ConfigPublicationComponent } from './admin/config-publication/config-pu
 import { RegionEducativeComponent } from './admin/region-educative/region-educative.component'; // <-- NgModel lives here
 registerLocaleData(localeFr, 'fr');
 import { LOCALE_ID } from '@angular/core';
-import { GestionLogComponent } from './admin/gestion-log/gestion-log.component';
+import GestionLogComponent from './admin/gestion-log/gestion-log.component';
 import { StatistiqueComponent } from './admin/statistique/statistique.component';
 import { CalendarComponent } from './admin/calendar/calendar.component';
 import { ImportFileComponent } from './admin/import-file/import-file.component';
@@ -38,6 +38,10 @@ import { StepBEPCComponent } from './resultatBEPC/step-bepc/step-bepc.component'
 import { ConsultationBEPCComponent } from './resultatBEPC/consultation-bepc/consultation-bepc.component';
 import { StepBACIComponent } from './resultatBACI/step-baci/step-baci.component';
 import { ConsultationBACIComponent } from './resultatBACI/consultation-baci/consultation-baci.component';
+import { StepBACIIComponent } from './resultatBACII/step-bacii/step-bacii.component';
+import { ConsultationBACIIComponent } from './resultatBACII/consultation-bacii/consultation-bacii.component';
+import { UtilisateurComponent } from './admin/gestionUtilisateur/utilisateur/utilisateur.component';
+import { RoleComponent } from './admin/gestionUtilisateur/role/role.component';
 
 
 
@@ -68,7 +72,11 @@ import { ConsultationBACIComponent } from './resultatBACI/consultation-baci/cons
     StepBEPCComponent,
     ConsultationBEPCComponent,
     StepBACIComponent,
-    ConsultationBACIComponent
+    ConsultationBACIComponent,
+    StepBACIIComponent,
+    ConsultationBACIIComponent,
+    UtilisateurComponent,
+    RoleComponent
   ],
   imports: [
     BrowserModule,

@@ -1,3 +1,74 @@
 /* Importation des css externe*/
 @import "~bootstrap/dist/css/bootstrap.css";
 @import "~font-awesome/css/font-awesome.css";
+
+
+
+.elementor-1266 .elementor-element.elementor-element-34b545c > .elementor-container{
+    min-height:122px;
+}
+.elementor-1266 .elementor-element.elementor-element-34b545c:not(.elementor-motion-effects-element-type-background), .elementor-1266 .elementor-element.elementor-element-34b545c > .elementor-motion-effects-container > .elementor-motion-effects-layer{
+    background-color:#006A9A;
+}
+.elementor-1266 .elementor-element.elementor-element-34b545c > .elementor-background-overlay{
+    background-color:rgba(0, 0, 0, 0.78);
+    background-image:url("../src/assets/img/Doodle-min-education.png");
+    background-position:center center;
+    background-repeat:repeat;
+    background-size:30%;
+    opacity:0.15;
+    transition:background 0.3s, border-radius 0.3s, opacity 0.3s;
+}
+.elementor-1266 .elementor-element.elementor-element-34b545c{
+    transition:background 0.3s, border 0.3s, border-radius 0.3s, box-shadow 0.3s;
+    padding:20px 0px 0px 0px;
+}
+.elementor-1266 .elementor-element.elementor-element-b6ea221 .elementor-heading-title{
+    color:var( --e-global-color-112d7729 );
+    font-family:"Montserrat", Montserrat;
+    font-size:25px;
+    font-weight:500;
+}
+.elementor-1266 .elementor-element.elementor-element-8c3182d .ee-breadcrumbs{
+    margin-left:-12px;
+}
+.elementor-1266 .elementor-element.elementor-element-8c3182d .ee-breadcrumbs__item{
+    margin-left:12px;color:#ffffff;
+}
+.elementor-1266 .elementor-element.elementor-element-8c3182d .ee-breadcrumbs__separator{
+    margin-left:12px;color:#ffffff;
+}
+.elementor-1266 .elementor-element.elementor-element-8c3182d .ee-breadcrumbs__text{
+    font-family:"Montserrat", Montserrat;font-size:13px;
+    font-weight:400;
+}
+.elementor-1266 .elementor-element.elementor-element-8c3182d .ee-breadcrumbs__item a{
+    color:#ffffff;
+}
+.elementor-1266 .elementor-element.elementor-element-cb59059{
+    margin-top:30px;
+    margin-bottom:30px;
+}
+.elementor-1266 .elementor-element.elementor-element-9abb32e .vak-pEtab_nav{
+    text-align:left;
+}
+.elementor-1266 .elementor-element.elementor-element-9abb32e .vak-pEtab_nav ul li a{
+    color:#006A9A;
+    font-family:"Montserrat", Montserrat;font-size:11px;
+}
+.elementor-1266 .elementor-element.elementor-element-9abb32e .vak-pEtab_nav ul li.active a{
+    color:#FFFFFF;
+    background-color:#006A9A;
+}
+.elementor-1266 .elementor-element.elementor-element-9abb32e .vak-pEtab_nav.top ul li:before{
+    height:3px;
+}
+.elementor-1266 .elementor-element.elementor-element-9abb32e .vak-pEtab_nav.left ul li:before, .elementor-1266 .elementor-element.elementor-element-9abb32e .vak-pEtab_nav.right ul li:before{
+    width:3px;
+}
+.elementor-1266 .elementor-element.elementor-element-9abb32e .vak-pEtab_nav ul li{border-radius:5px 5px 5px 5px;overflow:hidden;}.elementor-1266 .elementor-element.elementor-element-56dc6ab span.post-navigation__prev--label, .elementor-1266 .elementor-element.elementor-element-56dc6ab span.post-navigation__next--label{
+    font-family:"Montserrat", Montserrat;
+}
+.elementor-1266 .elementor-element.elementor-element-56dc6ab span.post-navigation__prev--title, .elementor-1266 .elementor-element.elementor-element-56dc6ab span.post-navigation__next--title{font-family:"Montserrat", Montserrat;}@media(max-width:767px){.elementor-1266 .elementor-element.elementor-element-34b545c > .elementor-container{
+    min-height:200px;
+}}

@@ -5,6 +5,7 @@ import { DatePublicationGenerale } from 'src/app/Model/DatePublicationGenerale';
 import { Examen } from 'src/app/Model/Examen';
 import { Region } from 'src/app/Model/Region';
 import { ResultatExamen } from 'src/app/Model/Resultat';
+import { ServicesPublicResultatCEPDService } from '../services-public-resultat-cepd.service';
 
 @Component({
   selector: 'app-consultation-cepd',
@@ -16,6 +17,7 @@ export class ConsultationCEPDComponent implements OnInit {
   examens!:Examen[];
   examenSelected = 'CEPD';
   table_resultatExamen: ResultatExamen[]=[];
+  modeResultat: any =0;
   numTable: number=0;
   type_enseignement: string="";
   zone: string="";
@@ -36,7 +38,7 @@ export class ConsultationCEPDComponent implements OnInit {
     console.log("La selection",this.examenSelected);
   }
 
-  constructor(private resultatService : ResultatService) { }
+  constructor(private resultatService : ResultatService,private resultatServicePublicCEPD:ServicesPublicResultatCEPDService) { }
 
   ngOnInit(): void {
     this.regions=[
@@ -112,15 +114,17 @@ export class ConsultationCEPDComponent implements OnInit {
 
   getResultCEPD(){
     if (this.zone!=""){
-      this.resultatService.getResultAPIUrl(this.numTable,this.zone).toPromise().then(data=>{
+      this.resultatServicePublicCEPD.getResultAPIUrl(this.numTable,this.zone).toPromise().then(data=>{
         console.log('recherche CEPD',data);
         console.log('zooonnne===>',this.zone);
         
         this.table_resultatExamen=data;
+        this.modeResultat=1;
       })
     }
     else{
       this.table_resultatExamen=[];
+      this.modeResultat=1;
     }
     
   } 

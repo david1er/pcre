@@ -25,7 +25,7 @@
 
 
 
-<div id="content-wrap" class="container clr">
+<div id="content-wrap" class="container clr" style="margin-top: 3%;">
 
     <div id="primary" class="content-area clr">
 
@@ -80,8 +80,10 @@
 
                                 </table>    
                             </div>
-                            <div *ngIf="table_resultatExamen?.length==0" class="alert alert-primary text-center col-form-label-lg" role="alert">
-                                Aucune information fournie !!!
+                            <div *ngIf="modeResultat==1">
+                                <div *ngIf="table_resultatExamen?.length==0" class="alert alert-primary text-center col-form-label-lg" role="alert">
+                                    Aucune information fournie !!!
+                                </div>
                             </div>
 
                     <a class="error-btn button" href="https://education.gouv.tg/">Revenir à l’accueil</a>

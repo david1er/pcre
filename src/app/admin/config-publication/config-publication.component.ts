@@ -4,6 +4,7 @@ import { Config } from 'src/app/Model/Config';
 import { ResultatService } from '../resultat.service';
 import { DatePipe } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
+import { ServiceAdminConfigPublicationService } from './services/service-admin-config-publication.service';
 
 
 @Component({
@@ -32,7 +33,9 @@ export class ConfigPublicationComponent implements OnInit {
   myInput = document.getElementById('myInput')
 
 
-  constructor(private resultatService : ResultatService){}
+  constructor(
+    private resultatService : ResultatService,
+    private serviceAdminConfigPublicationService: ServiceAdminConfigPublicationService ){}
 
   ngOnInit(): void {
     this.examens=[
@@ -53,7 +56,7 @@ export class ConfigPublicationComponent implements OnInit {
    * Methode d'affichage des configs
   */
   getCongifAll(){
-    this.resultatService.getAPIData2().toPromise().then(data=>{
+    this.serviceAdminConfigPublicationService.getAPIData2().toPromise().then(data=>{
       this.table_config=data;
   },(error:HttpErrorResponse)=>{alert(error.message);})
 };
@@ -62,7 +65,7 @@ export class ConfigPublicationComponent implements OnInit {
  * Methode d'ajout des config
  */
   addConfig(){
-    this.resultatService.postAdminConfigAPIURL(this.newConfig).toPromise().then(config=>{
+    this.serviceAdminConfigPublicationService.postAdminConfigAPIURL(this.newConfig).toPromise().then(config=>{
       this.message="Date de publication de "+this.newConfig.examen+" bien enrégistré";
       console.log("les infos===++++++++++++++++++++++++++++++++++++>",config);
       window.setTimeout(function(){location.reload()},2000)
@@ -74,7 +77,7 @@ export class ConfigPublicationComponent implements OnInit {
  */
   updateConfig(config:Config){
     console.log("les infos===>",config);
-    this.resultatService.updateAdminConfigAPIURL(config).toPromise().then(config=>{
+    this.serviceAdminConfigPublicationService.updateAdminConfigAPIURL(config).toPromise().then(config=>{
       this.message="Date de publication bien enrégistrée";
       window.setTimeout(function(){location.reload()},2000)
     },(error:HttpErrorResponse)=>{alert(error.message);})
@@ -87,7 +90,7 @@ export class ConfigPublicationComponent implements OnInit {
   deleteConfig(config:Config){
     let conf = confirm("Voulez-vous réelement supprimer cette information?");
     if (conf){
-    this.resultatService.deleteAdminConfigAPIURL(config.idConfig).toPromise().then(()=>{
+    this.serviceAdminConfigPublicationService.deleteAdminConfigAPIURL(config.idConfig).toPromise().then(()=>{
       this.message="Information supprimé avec succès";
       console.log("supprimer ooooh===>");
       this.deleteConfigOfTable(config);

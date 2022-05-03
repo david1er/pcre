@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { GestionLogComponent } from './gestion-log.component';
+import GestionLogComponent from './gestion-log.component';
 
 describe('GestionLogComponent', () => {
   let component: GestionLogComponent;
