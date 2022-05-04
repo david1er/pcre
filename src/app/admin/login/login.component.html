@@ -15,28 +15,28 @@
               Bienvenue sur la page d'authentification de votre espace administration, veuillez vous identifiez pour accéder à votre compte.
             </p>
           </div>
-  
+
           <div class="col-lg-7 mb-6 mb-lg-0">
             <div class="card">
               <div class="card-body py-5 px-md-5">
 
                 <form #loginFormulaire="ngForm">
                     <div class="form-outline mb-4">
-                        <label for="email" class="col-form-label-lg">Email</label>
-                        <input email required
+                        <label class="col-form-label-lg">Nom d'utilisateur</label>
+                        <input required
                             type="text"
-                            ngModel name="email"
+                            ngModel name="username"
                             class="form-control" id="email">
                     </div>
                     <div class="form-outline mb-4">
-                        <label for="password" class="col-form-label-lg">Mot de passe</label>
+                        <label class="col-form-label-lg">Mot de passe</label>
                         <input required
                             minlength="4"
                             type="password"
                             ngModel name="password"
                             class="form-control" id="pwd">
                     </div>
-                    <button 
+                    <button
                         [disabled]="loginFormulaire.invalid"
                         (click)="login(loginFormulaire)"
                         class="error-btn button btn-block mb-4" style="margin-top:2%;">
@@ -52,4 +52,4 @@
     <!-- Jumbotron -->
   </section>
   <!-- Section: Design Block -->
-  
+

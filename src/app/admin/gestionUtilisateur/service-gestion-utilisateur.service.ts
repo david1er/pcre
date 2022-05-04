@@ -12,10 +12,18 @@ export class ServiceGestionUtilisateurService {
 
   /**
  * API vers AppUser
- * @returns 
+ * @returns
  */
    getAPIData(){
     return this.http.get<any>("http://"+this.applicationService.URL_user+'users/allUsers');
+  }
+
+  /**
+   * API vers AppUser
+   * @returns
+   */
+  getRoles(){
+    return this.http.get<any>("http://"+this.applicationService.URL_user+'users/allRoles');
   }
 
   /**
@@ -23,26 +31,29 @@ export class ServiceGestionUtilisateurService {
    */
   /**
    * Methode d'ajout d'un utilisateur
-   * @returns 
+   * @returns
    */
    postAdminAppUserAPIURL(appUser:AppUser){
-    return this.http.post<AppUser>(this.applicationService.URL+'users',appUser);
+    return this.http.post<AppUser>(this.applicationService.URL_user+'users',appUser);
   }
 
   /**
    * Methode de mise à jour de utilisateur
-   * @returns 
+   * @returns
    */
   updateAdminAppUserAPIURL(appUser:AppUser){
-    return this.http.put<AppUser>(this.applicationService.URL+'users',appUser);
-  }
-  
-  /**
-   * Methode de suppression de utilisateur
-   * @returns 
-   */
-  deleteAdminAppUserAPIURL(id:number){
-    return this.http.delete<any>(`${this.applicationService.URL}configs/${id}`);
+    return this.http.put<AppUser>(this.applicationService.URL_user+'users',appUser);
   }
 
+  /**
+   * Methode de suppression de utilisateur
+   * @returns
+   */
+  deleteAdminAppUserAPIURL(id:number){
+    return this.http.delete<any>(`${this.applicationService.URL_user}configs/${id}`);
+  }
+
+  postNewUser(data: any) {
+    return this.http.post<AppUser>("http://"+this.applicationService.URL_user+'register',data);
+  }
 }
