@@ -13,6 +13,10 @@ import { DatePublicationGenerale } from '../Model/DatePublicationGenerale';
 })
 export class StepComponent implements OnInit {
   isShown: boolean = false;
+  isShowCEPD: boolean = false;
+  isShowBEPC: boolean = false;
+  isShowBACI: boolean = false;
+  isShowBACII: boolean = false;
   table_datePub: DatePublicationGenerale[]=[];
   table_config: Config[]=[];
   aujourdhui = moment().format('L');
@@ -21,6 +25,7 @@ export class StepComponent implements OnInit {
   ngOnInit(): void {
     this.getDatePublicationGeneraleAll();
     this.aujourdhui;
+    this.getCongifAll();
   }
 
   /**
@@ -55,6 +60,55 @@ export class StepComponent implements OnInit {
     this.serviceAdminConfigPublicationService.getAPIData2().toPromise().then(data=>{
       this.table_config=data;
       this.table_config.forEach((lineConfig) => { 
+        if(lineConfig.examen=='CEPD'){
+
+            if(new Date(lineConfig.date_publicationDebut).getTime()<=debutDateJ.getTime() && debutDateJ.getTime()<=new Date(lineConfig.date_publicationFin).getTime() ){
+          console.log("lineConfig.date_publicationDebut---------------",new Date(lineConfig.date_publicationDebut).getTime()); 
+          console.log("lineConfig.date_publicationFin---------------",new Date(lineConfig.date_publicationFin).getTime());
+          this.isShowCEPD = !this.isShowCEPD; 
+          console.log("this.isShowCEPD",this.isShowCEPD);
+          }else{
+            console.log("la date startdate",debutDateJ.getTime());
+            console.log("la date string startdate",debutDateJ);
+            this.isShowCEPD = this.isShowCEPD; 
+          } 
+        }
+        if(lineConfig.examen=='BEPC'){
+          if(new Date(lineConfig.date_publicationDebut).getTime()<=debutDateJ.getTime() && debutDateJ.getTime()<=new Date(lineConfig.date_publicationFin).getTime() ){
+            console.log("lineConfig.date_publicationDebut---------------",new Date(lineConfig.date_publicationDebut).getTime()); 
+            console.log("lineConfig.date_publicationFin---------------",new Date(lineConfig.date_publicationFin).getTime());
+            this.isShowBEPC = !this.isShowBEPC; 
+            console.log("this.isShowCEPD",this.isShowCEPD);
+            }else{
+              console.log("la date startdate",debutDateJ.getTime());
+              console.log("la date string startdate",debutDateJ);
+              this.isShowBEPC = this.isShowBEPC; 
+            } 
+        }
+        if(lineConfig.examen=='BACI'){
+          if(new Date(lineConfig.date_publicationDebut).getTime()<=debutDateJ.getTime() && debutDateJ.getTime()<=new Date(lineConfig.date_publicationFin).getTime() ){
+            console.log("lineConfig.date_publicationDebut---------------",new Date(lineConfig.date_publicationDebut).getTime()); 
+            console.log("lineConfig.date_publicationFin---------------",new Date(lineConfig.date_publicationFin).getTime());
+            this.isShowBACI = !this.isShowBACI; 
+            console.log("this.isShowBACI",this.isShowBACI);
+            }else{
+              console.log("la date startdate",debutDateJ.getTime());
+              console.log("la date string startdate",debutDateJ);
+              this.isShowBACI = this.isShowBACI; 
+            } 
+        }
+        if(lineConfig.examen=='BACII'){
+          if(new Date(lineConfig.date_publicationDebut).getTime()<=debutDateJ.getTime() && debutDateJ.getTime()<=new Date(lineConfig.date_publicationFin).getTime() ){
+            console.log("lineConfig.date_publicationDebut---------------",new Date(lineConfig.date_publicationDebut).getTime()); 
+            console.log("lineConfig.date_publicationFin---------------",new Date(lineConfig.date_publicationFin).getTime());
+            this.isShowBACII = !this.isShowBACII; 
+            console.log("this.isShowBACI",this.isShowBACII);
+            }else{
+              console.log("la date startdate",debutDateJ.getTime());
+              console.log("la date string startdate",debutDateJ);
+              this.isShowBACII = this.isShowBACII; 
+            } 
+        }
         /* if(new Date(lineConfig.date_publicationGeneraleDebut).getTime()<=debutDateJ.getTime() && debutDateJ.getTime()<=new Date(line.date_publicationGeneraleFin).getTime() ){
           console.log("lineDebut---------------",new Date(lineConfig.date_publicationGeneraleDebut).getTime()); 
           console.log("lineFin---------------",new Date(lineConfig.date_publicationGeneraleFin).getTime());

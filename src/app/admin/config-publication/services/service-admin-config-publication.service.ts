@@ -34,7 +34,7 @@ export class ServiceAdminConfigPublicationService {
    * @returns 
    */
    postAdminConfigAPIURL(config:Config){
-    return this.http.post<Config>(`${this.applicationService.URL}configs`,config,this.options);
+    return this.http.post<Config>("http://"+`${this.applicationService.URL}configs`,config);
   }
 
   /**
@@ -42,7 +42,7 @@ export class ServiceAdminConfigPublicationService {
    * @returns 
    */
   updateAdminConfigAPIURL(config:Config){
-    return this.http.put<Config>(`${this.applicationService.URL}configs`,config,this.options);
+    return this.http.put<Config>("http://"+`${this.applicationService.URL}configs`,config);
   }
   
   /**

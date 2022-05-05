@@ -14,7 +14,7 @@
                 <p class="card-text col-form-label-lg">2- Selectionnez votre REGION</p>
                 <p class="card-text col-form-label-lg">3- Entrer votre numero de table</p>
                 <p class="card-text col-form-label-lg">4- Cliquez sur RECHERCHER</p>
-                <p class="card-text col-form-label-lg text-center"><span class="badge rounded-pill bg-success fs-3" routerLink="/resultatCEPD/stepCEPD">Disponible</span></p>
+                <p class="card-text col-form-label-lg text-center"><span class="badge rounded-pill bg-success fs-3" routerLink="/resultatCEPD/stepCEPD" *ngIf="isShowCEPD">Disponible</span></p>
                 </div>
             </div>
         </div>
@@ -28,7 +28,7 @@
                 <p class="card-text col-form-label-lg">3- Cliquez sur RECHERCHER</p>
                 <p class="card-text col-form-label-lg"></p>
                 <p class="card-text col-form-label-lg"></p>
-                <p class="card-text col-form-label-lg"></p>
+                <p class="card-text col-form-label-lg text-center"><span class="badge rounded-pill bg-success fs-3" routerLink="/resultatBEPC/stepBEPC" *ngIf="isShowBEPC">Disponible</span></p>
                 </div>
             </div>
         </div>
@@ -41,6 +41,7 @@
                 <p class="card-text col-form-label-lg">2- Selectionnez votre type d'enseignement (Général/Technique)</p>
                 <p class="card-text col-form-label-lg">3- Entrer votre numero de table</p>
                 <p class="card-text col-form-label-lg">4- Cliquez sur RECHERCHER</p>
+                <p class="card-text col-form-label-lg text-center" *ngIf="isShowBACI"><span class="badge rounded-pill bg-success fs-3" routerLink="/resultatBACI/stepBACI">Disponible</span></p>
                 </div>
             </div>
         </div>
@@ -54,7 +55,7 @@
                 <p class="card-text col-form-label-lg">3- Cliquez sur RECHERCHER</p>
                 <p class="card-text col-form-label-lg"></p>
                 <p class="card-text col-form-label-lg"></p>
-                <p class="card-text col-form-label-lg"></p>
+                <p class="card-text col-form-label-lg text-center"><span class="badge rounded-pill bg-success fs-3" routerLink="/resultatBACII/stepBACII" *ngIf="isShowBACII">Disponible</span></p>
                 </div>
             </div>
         </div>
