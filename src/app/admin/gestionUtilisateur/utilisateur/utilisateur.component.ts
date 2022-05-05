@@ -14,35 +14,32 @@ export class UtilisateurComponent implements OnInit {
   examen: string="";
   etat: string="";
   position:number=0;
+  roles : any;
   date_publicationDebut!: Date;
   date_publicationFin!: Date;
-  
+
   appusers!:AppUser[];
   appUsers!:AppUser[];
   table_appUser: AppUser[]=[];
   id:number=0;
   username!: string;
   password!: string;
-  role!: number;
-  actived!: boolean;
-  newAppUser = new AppUser(this.id,this.username,this.password,this.actived,this.role);
-  
+  confirmedPassword !:string;
+  rolename!: number;
+  actived: boolean = true;
+  newAppUser = new AppUser(this.id,this.username,this.password,this.confirmedPassword,this.actived,this.rolename);
+
   editAppUser!:AppUser;
   ficheExamenList=[];
 
   myModal = document.getElementById('myModal')
   myInput = document.getElementById('myInput')
-  
-  
 
   constructor(private serviceGestionUtilisateurService : ServiceGestionUtilisateurService){}
 
   ngOnInit(): void {
-    
     this.getAppUserAll();
-    //this.addAppUser();
-    
-
+    this.getAppRoleAll();
   }
 
 
@@ -52,8 +49,19 @@ export class UtilisateurComponent implements OnInit {
   getAppUserAll(){
     this.serviceGestionUtilisateurService.getAPIData().toPromise().then(data=>{
       this.table_appUser=data;
+      console.log(this.table_appUser)
   },(error:HttpErrorResponse)=>{console.log(error.message);})
 };
+
+  /**
+   * Methode d'affichage des roles
+   */
+  getAppRoleAll(){
+    this.serviceGestionUtilisateurService.getRoles().toPromise().then(data=>{
+      this.roles=data;
+      console.log(this.roles);
+    },(error:HttpErrorResponse)=>{console.log(error.message);})
+  };
 
 /**
  * Methode d'ajout des AppUser
@@ -61,7 +69,7 @@ export class UtilisateurComponent implements OnInit {
   addAppUser(){
     this.serviceGestionUtilisateurService.postAdminAppUserAPIURL(this.newAppUser).toPromise().then(appUser=>{
       this.message="Date de publication de "+this.newAppUser.username+" bien enrégistré";
-      console.log("les infos===++++++++++++++++++++++++++++++++++++>",appUser);
+      console.log("les infos===++++++++++++++++++++++++++++++++++++>",this.newAppUser);
       window.setTimeout(function(){location.reload()},2000)
     },(error:HttpErrorResponse)=>{console.log(error.message);})
   };
@@ -79,7 +87,7 @@ export class UtilisateurComponent implements OnInit {
 
 /**
  * Methode de suppression de AppUser
- * @param AppUser 
+ * @param AppUser
  */
   deleteAppUser(appUser:AppUser){
     let conf = confirm("Voulez-vous réelement supprimer cette information?");
@@ -109,10 +117,24 @@ export class UtilisateurComponent implements OnInit {
     button.style.display='none';
     this.editAppUser=appUser;
     console.log("le editConffff====>",appUser);
-    button.setAttribute('data-toogle','modal'); 
+    button.setAttribute('data-toogle','modal');
     container?.appendChild(button);
     button.click();
   }
+
+  onSaveUser({data}: { data: any }) {
+    console.log(data);
+    data.rolename=1;
+
+    this.serviceGestionUtilisateurService.postNewUser(data)
+      .subscribe(data => {
+        console.log(data);
+
+      }, err => {
+        console.log(err);
+      })
+  }
+
 }
 
 
