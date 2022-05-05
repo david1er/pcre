@@ -42,6 +42,7 @@ const routes: Routes = [
   {path: 'admin/regionEducative', component: RegionEducativeComponent},
   {path: 'admin/stat', component: StatistiqueComponent},
   {path:'admin/login', component: LoginComponent},
+  {path:'admin/logout', component: LoginComponent},
   {path:'admin/gestion-user', component: UtilisateurComponent},
   {path:'admin/gestion-role', component: RoleComponent},
   {path:'**',component: ErrorComponent}

@@ -53,6 +53,11 @@ export class ApplicationService implements OnInit{
     this.parseJWT();
   }
 
+  getUser():any{
+    return  localStorage.getItem('utilisateur');
+    ;
+  }
+
   isAdmin(){
     localStorage.setItem('roles',JSON.stringify('ADMIN'));
     return this.roles.indexOf('ADMIN')>=0;

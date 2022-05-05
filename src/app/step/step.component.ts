@@ -1,6 +1,9 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import * as moment from 'moment';
+import { ServiceAdminConfigPublicationService } from '../admin/config-publication/services/service-admin-config-publication.service';
 import { ResultatService } from '../admin/resultat.service';
+import { Config } from '../Model/Config';
 import { DatePublicationGenerale } from '../Model/DatePublicationGenerale';
 
 @Component({
@@ -11,8 +14,9 @@ import { DatePublicationGenerale } from '../Model/DatePublicationGenerale';
 export class StepComponent implements OnInit {
   isShown: boolean = false;
   table_datePub: DatePublicationGenerale[]=[];
+  table_config: Config[]=[];
   aujourdhui = moment().format('L');
-  constructor(private resultatService : ResultatService) { }
+  constructor(private resultatService : ResultatService,private serviceAdminConfigPublicationService:ServiceAdminConfigPublicationService ) { }
 
   ngOnInit(): void {
     this.getDatePublicationGeneraleAll();
@@ -38,10 +42,34 @@ export class StepComponent implements OnInit {
           console.log("la date string startdate",startDate);
           this.isShown = !this.isShown; 
         }
-        
-        
-        
       });
   })
 };
+
+/**Date d'affichage des step suivant chaque examen */
+  /**
+   * Methode d'affichage des configs
+  */
+   getCongifAll(){
+    let debutDateJ =new Date(this.aujourdhui);
+    this.serviceAdminConfigPublicationService.getAPIData2().toPromise().then(data=>{
+      this.table_config=data;
+      this.table_config.forEach((lineConfig) => { 
+        /* if(new Date(lineConfig.date_publicationGeneraleDebut).getTime()<=debutDateJ.getTime() && debutDateJ.getTime()<=new Date(line.date_publicationGeneraleFin).getTime() ){
+          console.log("lineDebut---------------",new Date(lineConfig.date_publicationGeneraleDebut).getTime()); 
+          console.log("lineFin---------------",new Date(lineConfig.date_publicationGeneraleFin).getTime());
+          this.isShown = this.isShown; 
+        }else{
+          console.log("la date startdate",debutDateJ.getTime());
+          console.log("la date string startdate",debutDateJ);
+          this.isShown = !this.isShown; 
+        } */
+      }
+      );
+
+  },(error:HttpErrorResponse)=>{alert(error.message);})
+};
+
+
+
 }

@@ -129,6 +129,8 @@ export class UtilisateurComponent implements OnInit {
     this.serviceGestionUtilisateurService.postNewUser(data)
       .subscribe(data => {
         console.log(data);
+        this.message="L'utilisateur "+ data.username+" à été enrégistré";
+        window.setTimeout(function(){location.reload()},2000)
 
       }, err => {
         console.log(err);

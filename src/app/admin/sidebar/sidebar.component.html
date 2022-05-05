@@ -6,22 +6,25 @@
       <div class="list-group list-group-flush mx-3 mt-4">
         <a
            
-           class="list-group-item list-group-item-action py-2 ripple fs-2"
+           class="list-group-item list-group-item-action py-2 ripple fs-2 entetemenu"
            aria-current="true"
            >
           
-          <div class=" mt-3">
+          <div class=" mt-3" *ngIf="isAuth">
             
             <p>
-              <a class="btn btn-outline-primary btn-lg" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-                User
-              </a>
+              <img src="../../../assets/img/avatar_profil.png" class="sw_spd"/>&nbsp;
+              <span class="elementor-heading-title elementor-size-default" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                {{isAuth}}
+              </span>
+              
             </p>
             <div class="collapse" id="collapseExample">
               <div class="card card-body">
-                Se déconnecter
+               <a href="#" (click)="applicationService.logout()" style="text-decoration: none;">Se déconnecter</a>
               </div>
             </div>
+            
           </div>
         </a>
         <a
@@ -86,12 +89,14 @@
           > -->
         <a
            href="#"
+           routerLinkActive="active"
            class="list-group-item list-group-item-action py-2 ripple"
            ><i class="fa fa-calendar" aria-hidden="true"></i
           >&nbsp;<span>Calendrier</span></a
           >
         <a
            routerLink="/admin/gestion-user"
+           routerLinkActive="active"
            class="list-group-item list-group-item-action py-2 ripple"
            ><i class="fa fa-users" aria-hidden="true"></i
           >&nbsp;<span>Gestion des utilisateurs</span></a
