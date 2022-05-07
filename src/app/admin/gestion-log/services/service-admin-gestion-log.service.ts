@@ -9,7 +9,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { ApplicationService } from 'src/app/application.service';
 
 import 'rxjs/add/observable/merge';
-import 'rxjs/add/operator/map';
+//import 'rxjs/add/operator/map';
 
 @Injectable({
   providedIn: 'root'
@@ -28,7 +28,7 @@ export default class ServiceAdminGestionLogService {
   map:any;
 
   getIP(){
-    //return this.http.get("https://geolocation-db.com/json/?format=json"); 
+    //return this.http.get("https://geolocation-db.com/json/?format=json");
     return this.http
     .get('http://ip-api.com/json')
     .map(response => response || {})
