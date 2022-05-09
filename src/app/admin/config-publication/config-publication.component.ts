@@ -5,7 +5,7 @@ import { ResultatService } from '../resultat.service';
 import { DatePipe } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ServiceAdminConfigPublicationService } from './services/service-admin-config-publication.service';
-
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-config-publication',
@@ -31,13 +31,19 @@ export class ConfigPublicationComponent implements OnInit {
 
   myModal = document.getElementById('myModal')
   myInput = document.getElementById('myInput')
+  token:any;
 
 
   constructor(
     private resultatService : ResultatService,
-    private serviceAdminConfigPublicationService: ServiceAdminConfigPublicationService ){}
+    private serviceAdminConfigPublicationService: ServiceAdminConfigPublicationService,
+    private router: Router ){}
 
   ngOnInit(): void {
+    this.token = localStorage.getItem('token');
+    if (this.token == null) {
+      this.router.navigateByUrl('/admin/login');
+    }
     this.examens=[
       new Examen(1,"CEPD"),
       new Examen(2,"BEPC"),

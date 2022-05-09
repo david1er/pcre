@@ -45,6 +45,7 @@ import { RoleComponent } from './admin/gestionUtilisateur/role/role.component';
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -84,7 +85,8 @@ import { RoleComponent } from './admin/gestionUtilisateur/role/role.component';
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
-    NgxCsvParserModule
+    NgxCsvParserModule,
+    
   ],
   providers: [{ provide: LOCALE_ID, useValue: "fr-FR" }],
   bootstrap: [AppComponent]

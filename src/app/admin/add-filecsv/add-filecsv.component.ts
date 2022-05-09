@@ -8,6 +8,7 @@ import { ServiceAdminResultatCEPDService } from './services/service-admin-result
 import { ServiceAdminResultatBEPCService } from './services/service-admin-resultat-bepc.service';
 import { ServiceAdminResultatBACIService } from './services/service-admin-resultat-baci.service';
 import { ServiceAdminResultatBACIIService } from './services/service-admin-resultat-bacii.service';
+import { Router } from '@angular/router';
 
 export interface GoogleVolumeListResponse {
   totalItems: number;
@@ -39,6 +40,7 @@ export class AddFilecsvComponent implements OnInit {
   type_enseignement: string="";
   examen: string="";
   zone: string="";
+  token : any;
 
   isNameSelected: boolean | undefined;
   selectInput(event:any) {
@@ -53,11 +55,18 @@ export class AddFilecsvComponent implements OnInit {
     private resultatAdminBEPCService:ServiceAdminResultatBEPCService,
     private resultatAdminBACIService:ServiceAdminResultatBACIService,
     private resultatAdminBACIIService:ServiceAdminResultatBACIIService,
+    private router:Router
     ) { 
     
   }
   
   ngOnInit(): void {
+    
+    this.token = localStorage.getItem('token');
+    if (this.token == null) {
+      this.router.navigateByUrl('/admin/login');
+    } 
+
     this.regions=[
       new Region(1,"GOLFE"),
       new Region(2,"MARITIME"),

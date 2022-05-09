@@ -41,8 +41,8 @@ export class ConsultationBEPCComponent implements OnInit {
   constructor(private resultatService : ResultatService,private resultatServicePublicBEPC:ServicesPublicResultatBEPCService) { }
 
   ngOnInit(): void {
-  console.log('les examens=>',this.examens);
-  console.log('la dateeeeeee =>',this.currentDate);
+  //console.log('les examens=>',this.examens);
+  //console.log('la dateeeeeee =>',this.currentDate);
   this.getDatePublicationGeneraleAll();
   this.calculDatePublication();
   this.aujourdhui;
@@ -55,18 +55,18 @@ export class ConsultationBEPCComponent implements OnInit {
   getDatePublicationGeneraleAll(){
     let startDate =new Date(this.aujourdhui);
     let endDate = new Date("2022-05-10");
-    console.log("dataaaaa=====**************=========");
+    //console.log("dataaaaa=====**************=========");
     this.resultatService.getAPIDataPub().toPromise().then(data=>{
-      console.log("da2=====**************=========",data);
+      //console.log("da2=====**************=========",data);
       this.table_datePub=data;
       this.table_datePub.forEach((line) => { 
         if(new Date(line.date_publicationGeneraleDebut).getTime()<=startDate.getTime() && startDate.getTime()<=new Date(line.date_publicationGeneraleFin).getTime() ){
-          console.log("lineDebut---------------",new Date(line.date_publicationGeneraleDebut).getTime()); 
-          console.log("lineFin---------------",new Date(line.date_publicationGeneraleFin).getTime());
+          //console.log("lineDebut---------------",new Date(line.date_publicationGeneraleDebut).getTime()); 
+          //console.log("lineFin---------------",new Date(line.date_publicationGeneraleFin).getTime());
           this.show = !this.show; 
         }else{
-          console.log("la date startdate",startDate.getTime());
-          console.log("la date string startdate",startDate);
+          //console.log("la date startdate",startDate.getTime());
+          //console.log("la date string startdate",startDate);
           this.show = this.show; 
         }
         

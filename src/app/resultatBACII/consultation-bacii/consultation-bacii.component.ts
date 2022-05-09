@@ -34,7 +34,7 @@ export class ConsultationBACIIComponent implements OnInit {
   selectInput(event:any) {
     let selected = event.target.value;
     this.examenSelected = event.target.value;
-    console.log("La selection",this.examenSelected);
+    //console.log("La selection",this.examenSelected);
   }
 
   constructor(private resultatService : ResultatService) { }
@@ -48,8 +48,8 @@ export class ConsultationBACIIComponent implements OnInit {
       new Examen(5,"CAP"),
     ]
 
-    console.log('les examens=>',this.examens);
-    console.log('la dateeeeeee =>',this.currentDate);
+    //console.log('les examens=>',this.examens);
+    //console.log('la dateeeeeee =>',this.currentDate);
     this.getDatePublicationGeneraleAll();
     this.calculDatePublication();
     this.aujourdhui;
@@ -62,18 +62,18 @@ export class ConsultationBACIIComponent implements OnInit {
     getDatePublicationGeneraleAll(){
       let startDate =new Date(this.aujourdhui);
       let endDate = new Date("2022-05-10");
-      console.log("dataaaaa=====**************=========");
+      //console.log("dataaaaa=====**************=========");
       this.resultatService.getAPIDataPub().toPromise().then(data=>{
-        console.log("da2=====**************=========",data);
+        //console.log("da2=====**************=========",data);
         this.table_datePub=data;
         this.table_datePub.forEach((line) => { 
           if(new Date(line.date_publicationGeneraleDebut).getTime()<=startDate.getTime() && startDate.getTime()<=new Date(line.date_publicationGeneraleFin).getTime() ){
-            console.log("lineDebut---------------",new Date(line.date_publicationGeneraleDebut).getTime()); 
-            console.log("lineFin---------------",new Date(line.date_publicationGeneraleFin).getTime());
+            //console.log("lineDebut---------------",new Date(line.date_publicationGeneraleDebut).getTime()); 
+            //console.log("lineFin---------------",new Date(line.date_publicationGeneraleFin).getTime());
             this.show = !this.show; 
           }else{
-            console.log("la date startdate",startDate.getTime());
-            console.log("la date string startdate",startDate);
+            //console.log("la date startdate",startDate.getTime());
+            //console.log("la date string startdate",startDate);
             this.show = this.show; 
           }
           
@@ -85,10 +85,10 @@ export class ConsultationBACIIComponent implements OnInit {
 
   compareDates(){
     if(this.date1.getTime()<=this.currentDate.getTime() && this.currentDate.getTime()<= this.date2.getTime() ){
-      console.log("date1 < current date< date2",this.currentDate.getTime())
+      //console.log("date1 < current date< date2",this.currentDate.getTime())
     }
     if(this.date1.getTime()>this.currentDate.getTime()){
-      console.log("date1 > current date")
+      //console.log("date1 > current date")
     }
   }
   
@@ -99,15 +99,15 @@ export class ConsultationBACIIComponent implements OnInit {
  
   
   onSelectionChanged(selectionChange:any) {
-    console.log('valeur changement=>',selectionChange);
+    //console.log('valeur changement=>',selectionChange);
    
   }
 
   getResult(){
    
-      console.log("BACII");
+      //console.log("BACII");
       this.resultatService.getResultBACIIAPIUrl(this.numTable).toPromise().then(data=>{
-        console.log('recherche BACI',data);
+        //console.log('recherche BACI',data);
         
         this.table_resultatExamen=data;
         this.modeResultat=1;

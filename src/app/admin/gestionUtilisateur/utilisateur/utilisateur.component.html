@@ -79,6 +79,14 @@
                                <option *ngFor="let role of roles" [value]="role.id" >{{role.roleName}}</option>
                           </select>
                         </div>
+                        <div class="row mt-4">
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" name="actived" [(ngModel)]="newAppUser.actived">
+                            <label class="form-check-label col-form-label-lg" for="flexCheckDefault">
+                              Actif
+                            </label>
+                          </div>
+                        </div>
                       </div>
 
                       <div style="margin-top: 2%;">
@@ -93,6 +101,7 @@
                 <tr>
                   <th>Nom d'utilisateur</th>
                   <th>Password</th>
+                  <th>Actif</th>
                   <th colspan="2">Actions</th>
                 </tr>
               </thead>
@@ -100,6 +109,7 @@
                   <tr *ngFor="let user of table_appUser">
                   <td>{{user.username}}</td>
                   <td>{{user.password}}</td>
+                  <td>{{user.actived}}</td>
                   <td><button type="button"  class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modifAppUser">Modifier</button></td>
                   <td> <button  class="btn btn-danger">Supprimer</button> </td>
                 </tr>

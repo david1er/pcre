@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import ServiceAdminGestionLogService from './services/service-admin-gestion-log.service';
 
 @Component({
@@ -8,6 +9,7 @@ import ServiceAdminGestionLogService from './services/service-admin-gestion-log.
   styleUrls: ['./gestion-log.component.css']
 })
 export default class GestionLogComponent implements OnInit {
+  token:any;
   loading!: boolean;
   IppDetails!: void;
   errorMessage: any;
@@ -16,9 +18,15 @@ export default class GestionLogComponent implements OnInit {
   today:Date=new Date();
 
 
-  constructor(private serviceAdminGestionLogService:ServiceAdminGestionLogService) { }
+  constructor(private serviceAdminGestionLogService:ServiceAdminGestionLogService,
+    private router:Router) { }
 
   ngOnInit(): void {
+    this.token = localStorage.getItem('token');
+    if (this.token == null) {
+      this.router.navigateByUrl('/admin/login');
+    }
+
     this.getIP();
     this.today;
   }

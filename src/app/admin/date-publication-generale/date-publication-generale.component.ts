@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DatePublicationGenerale } from 'src/app/Model/DatePublicationGenerale';
 import { ResultatService } from '../resultat.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
 import { ServiceAdminDatePubGeneraleService } from './services/service-admin-date-pub-generale.service';
 
 @Component({
@@ -10,6 +11,7 @@ import { ServiceAdminDatePubGeneraleService } from './services/service-admin-dat
   styleUrls: ['./date-publication-generale.component.css']
 })
 export class DatePublicationGeneraleComponent implements OnInit {
+  token:any;
   message: string="";
   examen: string="";
   etat: string="";
@@ -27,9 +29,15 @@ export class DatePublicationGeneraleComponent implements OnInit {
 
   constructor(
     private resultatService : ResultatService,
-    private serviceAdminDatePubGeneraleService: ServiceAdminDatePubGeneraleService) { }
+    private serviceAdminDatePubGeneraleService: ServiceAdminDatePubGeneraleService,
+    private router:Router) { }
 
   ngOnInit(): void {
+    this.token = localStorage.getItem('token');
+    if (this.token == null) {
+      this.router.navigateByUrl('/admin/login');
+    }
+
     this.getDatePublicationGeneraleAll();
     this.afficheValider();
     

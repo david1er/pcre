@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { FicheExamenCEPD } from 'src/app/Model/FicheExamenCEPD';
 import { ResultatExamen } from 'src/app/Model/Resultat';
 import { ResultatService } from '../resultat.service';
@@ -11,6 +12,8 @@ import { ServiceAdminStatistiqueService } from './services/service-admin-statist
   styleUrls: ['./statistique.component.css']
 })
 export class StatistiqueComponent implements OnInit {
+  token:any;
+
   table_statistiqueCEPD:any;
   table_statistiqueBEPC:any;
   table_statistiqueBACI:any;
@@ -18,9 +21,16 @@ export class StatistiqueComponent implements OnInit {
 
   constructor(
     private resultatService : ResultatService,
-    private serviceAdminStatistiqueService:ServiceAdminStatistiqueService) { }
+    private serviceAdminStatistiqueService:ServiceAdminStatistiqueService,
+    private router:Router) { }
 
   ngOnInit(): void {
+    this.token = localStorage.getItem('token');
+    console.log(this.token)
+    if (this.token == null) {
+      this.router.navigateByUrl('/admin/login');
+    }
+
     this.getStatCEPDAll();
     this.getStatBEPCAll();
     this.getStatBACIAll();

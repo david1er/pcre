@@ -8,6 +8,7 @@ import { FicheExamenCEPD } from 'src/app/Model/FicheExamenCEPD';
 import { FicheExamenBEPC } from 'src/app/Model/FicheExamenBEPC';
 import { FicheExamenBACI } from 'src/app/Model/FicheExamenBACI';
 import { ResultatService } from '../resultat.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-import-file',
@@ -16,6 +17,7 @@ import { ResultatService } from '../resultat.service';
 })
 
 export class ImportFileComponent implements OnInit {
+  token:any;
   csvRecords: any;
   header = false;
   message:string="";
@@ -53,11 +55,17 @@ export class ImportFileComponent implements OnInit {
   
     
   
-  constructor(private resultatService: ResultatService,private ngxCsvParser: NgxCsvParser) { }
+  constructor(private resultatService: ResultatService,private router:Router,private ngxCsvParser: NgxCsvParser) { }
   @ViewChild('fileImportInput', { static: false }) fileImportInput: any;
 
   // Your applications input change listener for the CSV File
   fileChangeListener($event: any): void {
+    this.token = localStorage.getItem('token');
+    console.log(this.token)
+    if (this.token == null) {
+      this.router.navigateByUrl('/admin/login');
+    }
+
     console.log("info sur csv 1");
     // Select the files from the event
     const files = $event.srcElement.files;

@@ -54,7 +54,7 @@ export class ApplicationService implements OnInit{
   }
 
   getUser():any{
-    return  localStorage.getItem('utilisateur');
+    return localStorage.getItem('utilisateur');
     ;
   }
 
@@ -75,6 +75,9 @@ export class ApplicationService implements OnInit{
   logout(){
     localStorage.removeItem('token');
     localStorage.removeItem('roles');
+    //ajouter
+    localStorage.removeItem('utilisateur');
+    sessionStorage.removeItem('username');
     this.initParams();
   }
 

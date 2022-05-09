@@ -35,7 +35,7 @@ export class ConsultationCEPDComponent implements OnInit {
   selectInput(event:any) {
     let selected = event.target.value;
     this.examenSelected = event.target.value;
-    console.log("La selection",this.examenSelected);
+    //console.log("La selection",this.examenSelected);
   }
 
   constructor(private resultatService : ResultatService,private resultatServicePublicCEPD:ServicesPublicResultatCEPDService) { }
@@ -57,9 +57,9 @@ export class ConsultationCEPDComponent implements OnInit {
       new Examen(4,"BACII"),
       new Examen(5,"CAP"),
     ]
-    console.log('les regions=>',this.regions);
-    console.log('les examens=>',this.examens);
-    console.log('la dateeeeeee =>',this.currentDate);
+    //console.log('les regions=>',this.regions);
+    //console.log('les examens=>',this.examens);
+    //console.log('la dateeeeeee =>',this.currentDate);
     this.getDatePublicationGeneraleAll();
     this.calculDatePublication();
     this.aujourdhui;
@@ -73,16 +73,16 @@ export class ConsultationCEPDComponent implements OnInit {
       let startDate =new Date(this.aujourdhui);
       let endDate = new Date("2022-05-10");
       this.resultatService.getAPIDataPub().toPromise().then(data=>{
-        console.log("dataaaaa==============",data);
+        //console.log("dataaaaa==============",data);
         this.table_datePub=data;
         this.table_datePub.forEach((line) => { 
           if(new Date(line.date_publicationGeneraleDebut).getTime()<=startDate.getTime() && startDate.getTime()<=new Date(line.date_publicationGeneraleFin).getTime() ){
-            console.log("lineDebut---------------",new Date(line.date_publicationGeneraleDebut).getTime()); 
-            console.log("lineFin---------------",new Date(line.date_publicationGeneraleFin).getTime());
+            //console.log("lineDebut---------------",new Date(line.date_publicationGeneraleDebut).getTime()); 
+            //console.log("lineFin---------------",new Date(line.date_publicationGeneraleFin).getTime());
             this.show = !this.show; 
           }else{
-            console.log("la date startdate",startDate.getTime());
-            console.log("la date string startdate",startDate);
+            //console.log("la date startdate",startDate.getTime());
+            //console.log("la date string startdate",startDate);
             this.show = this.show; 
           }
           
@@ -94,10 +94,10 @@ export class ConsultationCEPDComponent implements OnInit {
 
   compareDates(){
     if(this.date1.getTime()<=this.currentDate.getTime() && this.currentDate.getTime()<= this.date2.getTime() ){
-      console.log("date1 < current date< date2",this.currentDate.getTime())
+      //console.log("date1 < current date< date2",this.currentDate.getTime())
     }
     if(this.date1.getTime()>this.currentDate.getTime()){
-      console.log("date1 > current date")
+      //console.log("date1 > current date")
     }
   }
   
@@ -108,15 +108,15 @@ export class ConsultationCEPDComponent implements OnInit {
  
   
   onSelectionChanged(selectionChange:any) {
-    console.log('valeur changement=>',selectionChange);
+    //console.log('valeur changement=>',selectionChange);
     
   }
 
   getResultCEPD(){
     if (this.zone!=""){
       this.resultatServicePublicCEPD.getResultAPIUrl(this.numTable,this.zone).toPromise().then(data=>{
-        console.log('recherche CEPD',data);
-        console.log('zooonnne===>',this.zone);
+        //console.log('recherche CEPD',data);
+        //console.log('zooonnne===>',this.zone);
         
         this.table_resultatExamen=data;
         this.modeResultat=1;

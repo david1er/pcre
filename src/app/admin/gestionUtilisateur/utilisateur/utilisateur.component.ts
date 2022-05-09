@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AppUser } from 'src/app/Model/Utilisateur';
 import { ResultatService } from '../../resultat.service';
 import { ServiceGestionUtilisateurService } from '../service-gestion-utilisateur.service';
@@ -10,6 +11,7 @@ import { ServiceGestionUtilisateurService } from '../service-gestion-utilisateur
   styleUrls: ['./utilisateur.component.css']
 })
 export class UtilisateurComponent implements OnInit {
+  token:any;
   message: string="";
   examen: string="";
   etat: string="";
@@ -35,9 +37,16 @@ export class UtilisateurComponent implements OnInit {
   myModal = document.getElementById('myModal')
   myInput = document.getElementById('myInput')
 
-  constructor(private serviceGestionUtilisateurService : ServiceGestionUtilisateurService){}
+  constructor(private serviceGestionUtilisateurService : ServiceGestionUtilisateurService,
+    private router:Router){}
 
   ngOnInit(): void {
+    this.token = localStorage.getItem('token');
+    console.log(this.token)
+    if (this.token == null) {
+      this.router.navigateByUrl('/admin/login');
+    }
+
     this.getAppUserAll();
     this.getAppRoleAll();
   }

@@ -1,5 +1,5 @@
 .card {
-    max-width: 24rem !important;
+    max-width: 100% !important;
     transition: all 0.2s ease-in-out;
     line-height: 24px;
   }
